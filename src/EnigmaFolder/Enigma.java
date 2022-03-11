@@ -2,6 +2,8 @@ package EnigmaFolder;
 
 // Start with one rotor , reflector and plugboard.
 
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,59 +17,59 @@ public class Enigma {
 
         public static class Machine{
 
-            private static HashMap<String,String> Plugboard = new HashMap<String,String>();
-            private static HashMap<String,String> Reflector = new HashMap<String,String>();
-            private static String Plugboardkey;
-            private static String Rotor1key;
-            private static String Rotor2key;
-            private static String Rotor3key;
+            public static ArrayList <String> Plugboard = new ArrayList<String>();
+            public static HashMap<String,String> Reflector = new HashMap<String,String>();
+            public static String Plugboardkey;
+            public static String Rotor1key;
+            public static String Rotor2key;
+            public static String Rotor3key;
 
            //Mapping the RotorValues for every element of Rotor:-
-            private static HashMap<String,String> RotorValues= new HashMap<String,String>();
+           public static HashMap<String,String> RotorValues= new HashMap<String,String>();
 
 //            //Making an arrayList to store all elements to figure out their ciphertext:-
 //            private static ArrayList <String > storedArr= new ArrayList<String>();
 
 
             //First Rotor:-
-            private static ArrayList<String> r1 = new ArrayList<String>(); // Creating the ArrayList object
+            public static ArrayList<String> r1 = new ArrayList<String>(); // Creating the ArrayList object
             //Second Rotor:-
-            private static ArrayList<String> r2 = new ArrayList<String>(); // Creating the ArrayList object
+            public static ArrayList<String> r2 = new ArrayList<String>(); // Creating the ArrayList object
             //Third Rotor:-
-            private static ArrayList<String> r3 = new ArrayList<String>(); // Creating the ArrayList object
+            public static ArrayList<String> r3 = new ArrayList<String>(); // Creating the ArrayList object
 
             //Creating an arraylist to keep track of all elements from rotor:-
-            private static ArrayList <String> storedElements = new ArrayList<String>();
+            public static ArrayList <String> storedElements = new ArrayList<String>();
 
 
             // For Plugboard keys:-
             static {
-                Plugboard.put("A",new String("E"));
-                Plugboard.put("B",new String("F"));
-                Plugboard.put("C",new String("G"));
-                Plugboard.put("D",new String("H"));
-                Plugboard.put("E",new String("J"));
-                Plugboard.put("F",new String("J"));
-                Plugboard.put("G",new String("J"));
-                Plugboard.put("H",new String("J"));
-                Plugboard.put("I",new String("J"));
-                Plugboard.put("J",new String("J"));
-                Plugboard.put("K",new String("J"));
-                Plugboard.put("L",new String("J"));
-                Plugboard.put("M",new String("J"));
-                Plugboard.put("N",new String("J"));
-                Plugboard.put("O",new String("J"));
-                Plugboard.put("P",new String("J"));
-                Plugboard.put("Q",new String("J"));
-                Plugboard.put("R",new String("J"));
-                Plugboard.put("S",new String("J"));
-                Plugboard.put("T",new String("J"));
-                Plugboard.put("U",new String("J"));
-                Plugboard.put("V",new String("J"));
-                Plugboard.put("W",new String("J"));
-                Plugboard.put("X",new String("J"));
-                Plugboard.put("Y",new String("J"));
-                Plugboard.put("Z",new String("J"));
+                Plugboard.add("A");
+                Plugboard.add("B");
+                Plugboard.add("C");
+                Plugboard.add("D");
+                Plugboard.add("E");
+                Plugboard.add("F");
+                Plugboard.add("G");
+                Plugboard.add("H");
+                Plugboard.add("I");
+                Plugboard.add("J");
+                Plugboard.add("K");
+                Plugboard.add("L");
+                Plugboard.add("M");
+                Plugboard.add("N");
+                Plugboard.add("O");
+                Plugboard.add("P");
+                Plugboard.add("Q");
+                Plugboard.add("R");
+                Plugboard.add("S");
+                Plugboard.add("T");
+                Plugboard.add("U");
+                Plugboard.add("V");
+                Plugboard.add("W");
+                Plugboard.add("X");
+                Plugboard.add("Y");
+                Plugboard.add("Z");
             }
 
 
@@ -117,14 +119,48 @@ public class Enigma {
              System.out.println("The letter you entered: " + letter);
 
 
-                //Must output map of the key.
-             if(Plugboard.containsKey(letter)){
-                 Plugboardkey = Plugboard.get(letter);
+                //Setting input text as Plugboard key.
+             if(Plugboard.contains(letter)){
+                 Plugboardkey = letter;
                  //For Check:-
                  System.out.println("Your PlugboardKey:" + Plugboardkey);
 
              }
+
+             //Swapping the Plugboard keys:-
+             PlugboardKeys("B","X");
+             //Swapping the Plugboard keys:-
+             PlugboardKeys("A","C");
+             //Swapping the Plugboard keys:-
+             PlugboardKeys("K","L");
+             //For Check:-
+             System.out.println("Your new PlugboardKey:" + Plugboardkey);
          }
+
+
+         //Thus , this object swaps the values of keys.
+         //Setting plugboard keys if needed:-
+         public static void PlugboardKeys(String keyA , String keyB){
+
+                //Finding the index of key which is supposed to be substituted.
+             int i = Plugboard.indexOf(keyA);
+
+             //Storing index of 2nd key:-
+             int j = Plugboard.indexOf(keyB);
+             System.out.println("Index of keyA which is to be substituted: "+ Plugboard.get(i));
+
+             Plugboard.set(i, keyB); // Substituting the 2nd key at informed index.
+             // Finishing the swap of the 2nd key as well.
+             Plugboard.set(j, keyA);
+
+                //This substitutes the value of keyA to keyB and vice-versa further.
+                    if(Plugboardkey.equals(keyA)) {
+                        Plugboardkey = keyB; //Setting the new plugboard key.
+                    }
+                    else if(Plugboardkey.equals(keyB)){
+                        Plugboardkey = keyA; //Setting the new plugboard key.
+                    }
+            }
 
 
          // We store rotor 1 substitution:-
@@ -194,8 +230,15 @@ public class Enigma {
                  Rotor1key= RotorValues.get(Plugboardkey);
                  //For Check:-
                  System.out.println("Your supposed Rotor1 substitution:" +Rotor1key);
-             }
 
+                 // Shifting Rotors by 1-1 bits whenever they are supposed to rotate:-
+                 ChangePositions(r1); // Rotor position changed by one bit after generating one ciphertext.
+
+                 //Initiating the rotation of next rotor after 1 complete rotation of 1st one:-
+                if(storedElements.size()==r1.size()){
+                    ChangePositions(r2);
+                }
+             }
          }
 
 
@@ -267,6 +310,11 @@ public class Enigma {
                  Rotor2key= RotorValues.get(Rotor1key);
                  //For Check:-
                  System.out.println("Your supposed Rotor2 substitution:" +Rotor2key);
+
+                 //Initiating the rotation of rotor3 after 1 complete rotation of 2nd rotor:-
+                 if(storedElements.size()==r1.size()+r2.size()){
+                     ChangePositions(r3);
+                 }
              }
 
          }
@@ -339,8 +387,13 @@ public class Enigma {
                  Rotor3key= RotorValues.get(Rotor2key);
                  //For Check:-
                  System.out.println("Your supposed Rotor3 substitution:" +Rotor3key);
-             }
 
+                 //Initiating the rotation of rotor1 after 1 complete rotation of 3rd rotor:-
+                 if(storedElements.size()==r1.size()+r2.size()+r3.size()){
+                     ChangePositions(r1);
+                     storedElements.clear();
+                 }
+             }
          }
 
 
@@ -377,6 +430,7 @@ public class Enigma {
                 //For checking:-
              System.out.println("Therefore new rotated rotor1: "+Arrays.toString(rotor.toArray()));
              System.out.println("Checking for stored Elements: "+Arrays.toString(storedElements.toArray()));
+             System.out.println("Size of stored Elements: "+storedElements.size());
 
          }
 
@@ -386,43 +440,34 @@ public class Enigma {
              if(Reflector.containsKey(Rotor3key)){
                  String reflectorKey = Reflector.get(Rotor3key);
                  System.out.println("Thus , your cipherLetter : "+ reflectorKey);
-
-                // Shifting Rotors by 1-1 bits whenever they are supposed to rotate:-
-                 if(storedElements.size()==26){
-                     ChangePositions(r2); // when Rotor 1 finishes 1 rotation
-                 }
-                 else if(storedElements.size()==52){
-                     ChangePositions(r3); // when Rotor 2 finishes 1 rotation
-                 }
-                 else{
-                     ChangePositions(r1); // Rotor position changed by one bit after generating one ciphertext.
-                 }
              }
          }
+        }
 
+        public static void forwardRotation(){
+            //Working.
+            PlugboardOutput();
+            Rotor1Value();
+            Rotor2Value();
+            Rotor3Value();
+            ReflectorKey();
         }
 
     public static void main(String[] args) {
 
-                PlugboardOutput();
-                Rotor1Value();
-                Rotor2Value();
-                Rotor3Value();
-                //Working.
-                ReflectorKey();
-
+                forwardRotation();
 
            // Hence , all objects are working correctly.
 
 
         /*
         * POINTS TO WORK ON:-
-        * Verify if this understanding is correct.
-        * /\ Figure out a way to execute ciphertexts for sentences than letters.
+        * when should 2nd rotor rotate compared to 1st one and so on..
         * Make a GUI.
-        * Check if after rotation , r1 and r2 need to rotate together or not and ..
-        * .. same for r3?
-        * ASK FOR PLUGBOARD IDEAS.
+        * // USE THREADING TO GIVE THE ENCRYPTION OF LETTERS AS SENTENCE OR USE YOUR WAY BUT THREADING SUGGESTED
+        * USE SWITCH STATEMENTS TO MAKE SLIDERS IF WANT TO FOR MAPPING PLUGBOARD KEYS.
+        * Can use the switch statements for referencing digits as letters in sliders.
+        * Ask for clarity involving rotation of rotors.
         *  */
 
     }

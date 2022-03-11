@@ -1,4 +1,4 @@
-package sample.EnigmaFolder;
+package EnigmaFolder;
 
 import javafx.scene.control.*;
 
@@ -33,15 +33,31 @@ public class EnigmaController {
 
     //Setting values at Rotor1 Slider:-(First need to check if will work nicely.)
     public void rotor1(ActionEvent actionEvent){
+        //Assigning the slider:-
         Rotor1 = new Slider();
+        //Min value
         Rotor1.setMin(1);
+        //Max value
         Rotor1.setMax(26);
+        //Setting initial value
         Rotor1.setValue(1);
-        Rotor1.setShowTickLabels(true);
+        //To display ticks
         Rotor1.setShowTickMarks(true);
-        Rotor1.setMajorTickUnit(50);
-        Rotor1.setMinorTickCount(5);
-        Rotor1.setBlockIncrement(10);
+        //Value between two ticks
+        Rotor1.setMajorTickUnit(1);
+        //Space between two ticks
+        Rotor1.setBlockIncrement(2);
+        
+        // Using the switch statement to assign letters to digits chosen:-
+        //MAYBE USE VALUE TO SEE WHAT IS CHOSEN IN SLIDER?
+//        switch(digit){
+//            case 1 :
+//                letter = "A";
+//                break;
+//            case 2 :
+//
+//
+//        }
     }
 
 
