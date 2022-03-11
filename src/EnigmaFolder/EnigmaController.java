@@ -28,8 +28,8 @@ public class EnigmaController {
         EnterText.getText();
         d1 = new String(EnterText.getText());
         EnterText.setText(""+d1);
-
     }
+
 
     //Setting values at Rotor1 Slider:-(First need to check if will work nicely.)
     public void rotor1(ActionEvent actionEvent){
@@ -97,9 +97,6 @@ public class EnigmaController {
 //        String d1 = new String(EnterText.getText());
         Ciphertext.setText(""+d1);
     }
-
-
-
 
 
     //Understand how sliders work
