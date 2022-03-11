@@ -1,4 +1,4 @@
-package sample.EnigmaFolder;
+package EnigmaFolder;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
