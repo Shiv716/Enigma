@@ -1,9 +1,16 @@
 package EnigmaFolder;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 public class EnigmaController {
 
@@ -12,13 +19,14 @@ public class EnigmaController {
     public Label Rotor3Display;
     public Label  Ciphertext;
     public TextField EnterText;
-    public Slider Rotor1;
-    public Slider Rotor2;
-    public Slider Rotor3;
-
+    public Spinner Rotor1;
+    public Spinner Rotor2;
+    public Spinner Rotor3;
+    public Button CipherGenerator;
 
     //Storing the letter provided by the user:-
     public static String d1;
+    
 
     public static void setD1(String d1) {
         EnigmaController.d1 = d1;
@@ -38,7 +46,7 @@ public class EnigmaController {
 
 
     //Setting values at Rotor1 Slider:-(First need to check if will work nicely.)
-   {
+
         
         // Using the switch statement to assign letters to digits chosen:-
         //MAYBE USE VALUE TO SEE WHAT IS CHOSEN IN SLIDER?
@@ -50,7 +58,7 @@ public class EnigmaController {
 //
 //
 //        }
-    }
+
 
     //Setting values at Rotor2 Slider:-(First need to check if will work nicely.)
 
@@ -59,34 +67,36 @@ public class EnigmaController {
     //Outputs ciphertext:-
 
     public void cipherInput(javafx.event.ActionEvent actionEvent) {
-        EnterText.getText();
+
+    }
+
+    public void generateCipher(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
+
         String d1 = new String(EnterText.getText());
         Ciphertext.setText(""+d1.toUpperCase());
     }
 
-    public void rotor1(MouseEvent mouseEvent) {
-
-        Rotor1.getValue();
-        int r1 = (int) Rotor1.getValue();
-        Rotor1Display.setText(""+ r1);
-
+    public void keyA(javafx.event.ActionEvent actionEvent) {
     }
 
-    public void rotor2(MouseEvent mouseEvent) {
-
+    public void keyB(javafx.event.ActionEvent actionEvent) {
     }
 
-    public void rotor3(MouseEvent mouseEvent) {
+//    Parent encrypt_1= FXMLLoader.load(getClass().getResource("encrypt.fxml"));
+//    Scene encrypt = new Scene(encrypt_1);
+//    Stage app_stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+//        app_stage.hide();
+//        app_stage.setScene(encrypt);
+//        app_stage.show();
+//    //encrypt_1.getScene();
+//        Ciphertext.setText(""+d1);
+//
 
-    }
 
-    public void generateCipher(javafx.event.ActionEvent actionEvent) {
-
-    }
-
-
-    //Understand how sliders work
+    /*
+    //use spinners for rotors
     // - and then assign letters to the textfield
+     - Give 6 plugboard key options as spinners or menu box
     // Use Enigma file to complete the architecture.
-
+     */
 }
