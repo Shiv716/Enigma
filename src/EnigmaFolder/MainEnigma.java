@@ -15,9 +15,9 @@ public class MainEnigma extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException //throws Exception
      {
-        Parent root = FXMLLoader.load(getClass().getResource("ENIGMA.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("encrypt.fxml"));
         primaryStage.setTitle("Enigma Machine");
-        primaryStage.setScene(new Scene(root, 630, 403));
+        primaryStage.setScene(new Scene(root, 630, 243));
         primaryStage.show();
     }
 }

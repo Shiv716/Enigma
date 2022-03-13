@@ -19,9 +19,9 @@ public class EnigmaController {
     public Label Rotor3Display;
     public Label  Ciphertext;
     public TextField EnterText;
-    public Spinner Rotor1;
-    public Spinner Rotor2;
-    public Spinner Rotor3;
+    public Spinner <String> Rotor1;
+    public Spinner <String> Rotor2;
+    public Spinner <String> Rotor3;
     public Button CipherGenerator;
 
     //Storing the letter provided by the user:-
@@ -67,13 +67,13 @@ public class EnigmaController {
     //Outputs ciphertext:-
 
     public void cipherInput(javafx.event.ActionEvent actionEvent) {
-
     }
 
     public void generateCipher(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
 
         String d1 = new String(EnterText.getText());
         Ciphertext.setText(""+d1.toUpperCase());
+        EnterText.clear();
     }
 
     public void keyA(javafx.event.ActionEvent actionEvent) {

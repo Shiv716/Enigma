@@ -36,16 +36,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EnigmaFolder.encryptController">
   <children>
     <AnchorPane fx:id="encrypt" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <ProgressBar fx:id="encrypting" layoutX="182.0" layoutY="112.0" prefHeight="20.0" prefWidth="262.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="62.0" prefHeight="43.0" prefWidth="193.0" text="Encrypting..." textAlignment="JUSTIFY" textFill="#1aab1a">
+            <ProgressBar fx:id="encrypting" layoutX="183.0" layoutY="100.0" prefHeight="20.0" prefWidth="262.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="211.0" layoutY="57.0" prefHeight="43.0" prefWidth="193.0" text=" Encrypting..." textAlignment="JUSTIFY" textFill="#1aab1a">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
+            <Button fx:id="cipher" layoutX="265.0" layoutY="141.0" mnemonicParsing="false" onAction="#encipher" prefHeight="20.0" prefWidth="85.0" text="Start!" textFill="#1151da" underline="true" />
       </children>
     </AnchorPane>
   </children>
