@@ -41,7 +41,7 @@
     <AnchorPane fx:id="encrypt" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <ProgressBar fx:id="encrypting" layoutX="183.0" layoutY="100.0" prefHeight="20.0" prefWidth="262.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="211.0" layoutY="57.0" prefHeight="43.0" prefWidth="193.0" text=" Encrypting..." textAlignment="JUSTIFY" textFill="#1aab1a">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="211.0" layoutY="57.0" prefHeight="43.0" prefWidth="193.0" text="Starting Enigma..." textAlignment="JUSTIFY" textFill="#1aab1a">
                <font>
                   <Font size="24.0" />
                </font>
