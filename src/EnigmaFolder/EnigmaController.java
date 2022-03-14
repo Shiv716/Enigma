@@ -1,24 +1,18 @@
 package EnigmaFolder;
 
-import javafx.application.Application;
+import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXMLLoader;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.ResourceBundle;
-
-import static EnigmaFolder.Enigma.Machine.RotorValues;
+import java.util.*;
 
 public class EnigmaController implements Initializable {
 
@@ -50,6 +44,7 @@ public class EnigmaController implements Initializable {
 
     //mapping them:-
     static{
+        letterByNumber.put(0," ");
         letterByNumber.put(1,"A");
         letterByNumber.put(2,"B");
         letterByNumber.put(3,"C");
@@ -84,44 +79,12 @@ public class EnigmaController implements Initializable {
     public static String d1;
 
 
-    public static void setD1(String d1) {
-        EnigmaController.d1 = d1;
-    }
-
-    //Inputs letter from the user:-
-    public void cipherInput(ActionEvent actionEvent){
-//        try{
-//            d1 = EnterText.getText();
-//        }
-//        catch(Exception e){
-//            System.out.println("Please enter Capital Letters only");
-//        }
-//
-//        EnterText.setText(""+d1);
-    }
-
-
-    //Setting values at Rotor1 Slider:-(First need to check if will work nicely.)
-
-        
-        // Using the switch statement to assign letters to digits chosen:-
-        //MAYBE USE VALUE TO SEE WHAT IS CHOSEN IN SLIDER?
-//        switch(digit){
-//            case 1 :
-//                letter = "A";
-//                break;
-//            case 2 :
-//
-//
-//        }
-
-
     //Setting values at Rotor2 Slider:-(First need to check if will work nicely.)
 
     //Setting values at Rotor3 Slider:-(First need to check if will work nicely.)
 
-    //Outputs ciphertext:-
 
+    //Inputs letter from the user:-
     public void cipherInput(javafx.event.ActionEvent actionEvent) {
         try{
             d1 = EnterText.getText();
@@ -133,24 +96,17 @@ public class EnigmaController implements Initializable {
         EnterText.setText(""+d1);
     }
 
-    public void generateCipher(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
 
+    //Outputs ciphertext:-
+    public void generateCipher(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
         String d1 = new String(EnterText.getText());
         Ciphertext.setText(""+d1.toUpperCase());
         EnterText.clear();
-
-
     }
 
-    public void keyA(javafx.event.ActionEvent actionEvent) {
-    }
-
-    public void keyB(javafx.event.ActionEvent actionEvent) {
-    }
 
 
     //To display Slider values in a Label.
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -160,7 +116,7 @@ public class EnigmaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 int value = (int) Rotor1.getValue();
-                if(letterByNumber.containsKey(value)){
+                if (letterByNumber.containsKey(value)) {
                     String letter_needed = letterByNumber.get(value);
                     Rotor1Display.setText(letter_needed);
                 }
@@ -174,7 +130,7 @@ public class EnigmaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 int value = (int) Rotor2.getValue();
-                if(letterByNumber.containsKey(value)){
+                if (letterByNumber.containsKey(value)) {
                     String letter_needed = letterByNumber.get(value);
                     Rotor2Display.setText(letter_needed);
                 }
@@ -188,7 +144,7 @@ public class EnigmaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 int value = (int) Rotor3.getValue();
-                if(letterByNumber.containsKey(value)){
+                if (letterByNumber.containsKey(value)) {
                     String letter_needed = letterByNumber.get(value);
                     Rotor3Display.setText(letter_needed);
                 }
@@ -196,35 +152,90 @@ public class EnigmaController implements Initializable {
         });
 
 
+        //USER GETS 6 PLUGBOARD KEYS TO SWAP THE VALUES SO 6 OPTIONS TO CHOOSE FROM IF WANTED
+        // - FOR ADDING CHANGING VALUES BEFORE THE ELEMENT ENTERS THE ROTORS.
+
         //Making the spinners:-
 
-        //Spinner 1 :
-        SpinnerValueFactory<String> valueFactory = new SpinnerValueFactory() {
-            @Override
-            public void decrement(int i) {
+        //Making an observable list of all values of our hashmap to be used in spinner factory as Strings:-
+        ObservableList<String> justLetters = FXCollections.observableArrayList();
+        justLetters.addAll(letterByNumber.values());
 
-            }
 
-            @Override
-            public void increment(int i) {
+        //Spinners :
+        SpinnerValueFactory<String> valueFactory1A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-            }
-        };
-        valueFactory.setValue("A");
-        //String stored_value = letterByNumber.get(valueFactory);
+        valueFactory1A.setValue(" ");
 
-         plugKey1A.setValueFactory(valueFactory);
-    }
+        //Spinner 1A:-
+        plugKey1A.setValueFactory(valueFactory1A);
+        //LIKEWISE:-
 
-//    Parent encrypt_1= FXMLLoader.load(getClass().getResource("encrypt.fxml"));
-//    Scene encrypt = new Scene(encrypt_1);
-//    Stage app_stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-//        app_stage.hide();
-//        app_stage.setScene(encrypt);
-//        app_stage.show();
-//    //encrypt_1.getScene();
-//        Ciphertext.setText(""+d1);
-//
+        //Spinner 1B:-
+        SpinnerValueFactory<String> valueFactory1B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory1B.setValue(" ");
+        plugKey1B.setValueFactory(valueFactory1B);
+
+        //Spinner 2A:-
+        SpinnerValueFactory<String> valueFactory2A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory2A.setValue(" ");
+        plugKey2A.setValueFactory(valueFactory2A);
+
+        //Spinner 2B:-
+        SpinnerValueFactory<String> valueFactory2B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory2B.setValue(" ");
+        plugKey2B.setValueFactory(valueFactory2B);
+
+        //Spinner 3A:-
+        SpinnerValueFactory<String> valueFactory3A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory3A.setValue(" ");
+        plugKey3A.setValueFactory(valueFactory3A);
+
+        //Spinner 3B:-
+        SpinnerValueFactory<String> valueFactory3B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory3B.setValue(" ");
+        plugKey3B.setValueFactory(valueFactory3B);
+
+        //Spinner 4A:-
+        SpinnerValueFactory<String> valueFactory4A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory4A.setValue(" ");
+        plugKey4A.setValueFactory(valueFactory4A);
+
+        //Spinner 4B:-
+        SpinnerValueFactory<String> valueFactory4B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory4B.setValue(" ");
+        plugKey4B.setValueFactory(valueFactory4B);
+
+        //Spinner 5A:-
+        SpinnerValueFactory<String> valueFactory5A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory5A.setValue(" ");
+        plugKey5A.setValueFactory(valueFactory5A);
+
+        //Spinner 5B:-
+        SpinnerValueFactory<String> valueFactory5B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory5B.setValue(" ");
+        plugKey5B.setValueFactory(valueFactory5B);
+
+        //Spinner 6A:-
+        SpinnerValueFactory<String> valueFactory6A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory6A.setValue(" ");
+        plugKey6A.setValueFactory(valueFactory6A);
+
+        //Spinner 6B:-
+        SpinnerValueFactory<String> valueFactory6B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+
+        valueFactory6B.setValue(" ");
+        plugKey6B.setValueFactory(valueFactory6B);
 
 
     /*
@@ -233,4 +244,5 @@ public class EnigmaController implements Initializable {
      - Give 6 plugboard key options as spinners or menu box
     // Use Enigma file to complete the architecture.
      */
+    }
 }

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../Documents/Chaudhary_Shivang_u2078485/Pro2(IntelliJ)/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../Documents/Chaudhary_Shivang_u2078485/Pro2(IntelliJ)/lib" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../Documents/Chaudhary_Shivang_u2078485/Pro2(IntelliJ)/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../Documents/Chaudhary_Shivang_u2078485/Pro2(IntelliJ)/lib" recursive="false" type="SOURCES" />
+  </library>
+</component>
