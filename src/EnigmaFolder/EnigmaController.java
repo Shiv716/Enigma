@@ -31,6 +31,18 @@ public class EnigmaController implements Initializable {
     public Slider Rotor2;
     public Slider Rotor3;
     public Button CipherGenerator;
+    public Spinner <String> plugKey1A;
+    public Spinner <String> plugKey1B;
+    public Spinner <String> plugKey2A;
+    public Spinner <String> plugKey2B;
+    public Spinner <String> plugKey3A;
+    public Spinner <String> plugKey3B;
+    public Spinner <String> plugKey4A;
+    public Spinner <String> plugKey4B;
+    public Spinner <String> plugKey5A;
+    public Spinner <String> plugKey5B;
+    public Spinner <String> plugKey6A;
+    public Spinner <String> plugKey6B;
 
     //Creating hashmap for mapping numbers to letters to be used later:-
 
@@ -70,7 +82,7 @@ public class EnigmaController implements Initializable {
 
     //Storing the letter provided by the user:-
     public static String d1;
-    
+
 
     public static void setD1(String d1) {
         EnigmaController.d1 = d1;
