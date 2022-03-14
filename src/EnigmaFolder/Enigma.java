@@ -104,6 +104,44 @@ public class Enigma {
             }
 
 
+            //This object rotates the rotor to set in the given element as first letter:-
+            public static void rotor1Set(String j){
+               //Loop rotates rotor until given element is the first one.
+
+                while(!j.equals(r1.get(0))){
+
+                    ChangePositions(r1);
+                }
+
+                System.out.println("Thus , we obtain new set and rotated motor: "+ Arrays.toString(r1.toArray()));
+            }
+
+
+            //This object rotates the rotor to set in the given element as first letter(FOR ROTOR2)
+            public static void rotor2Set(String j){
+               //Loop rotates rotor until given element is the first one.
+
+                while(!j.equals(r2.get(0))){
+
+                    ChangePositions(r2);
+                }
+
+                System.out.println("Thus , we obtain new set and rotated motor: "+ Arrays.toString(r2.toArray()));
+            }
+
+
+            //This object rotates the rotor to set in the given element as first letter(FOR ROTOR3)
+            public static void rotor3Set(String j){
+               //Loop rotates rotor until given element is the first one.
+
+                while(!j.equals(r3.get(0))){
+
+                    ChangePositions(r3);
+                }
+
+                System.out.println("Thus , we obtain new set and rotated motor: "+ Arrays.toString(r3.toArray()));
+            }
+
 
          // Substituted value for Input Key:-
          public static void PlugboardOutput(){
@@ -391,7 +429,7 @@ public class Enigma {
                  //Initiating the rotation of rotor1 after 1 complete rotation of 3rd rotor:-
                  if(storedElements.size()==r1.size()+r2.size()+r3.size()){
                      ChangePositions(r1);
-                     storedElements.clear();
+                     //storedElements.clear();
                  }
              }
          }
@@ -470,6 +508,9 @@ public class Enigma {
         * Ask for clarity involving rotation of rotors.
         *  */
 
+        rotor1Set("L");
+        rotor2Set("S");
+        rotor3Set("M");
     }
 }
 
