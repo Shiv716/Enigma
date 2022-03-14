@@ -194,6 +194,26 @@ public class EnigmaController implements Initializable {
                 }
             }
         });
+
+
+        //Making the spinners:-
+
+        //Spinner 1 :
+        SpinnerValueFactory<String> valueFactory = new SpinnerValueFactory() {
+            @Override
+            public void decrement(int i) {
+
+            }
+
+            @Override
+            public void increment(int i) {
+
+            }
+        };
+        valueFactory.setValue("A");
+        //String stored_value = letterByNumber.get(valueFactory);
+
+         plugKey1A.setValueFactory(valueFactory);
     }
 
 //    Parent encrypt_1= FXMLLoader.load(getClass().getResource("encrypt.fxml"));
