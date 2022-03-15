@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+//Importing Enigma class objects:-
+import static EnigmaFolder.Enigma.Machine.*;
+
+
 public class EnigmaController implements Initializable {
 
     public Label Rotor1Display;
@@ -75,9 +79,11 @@ public class EnigmaController implements Initializable {
     }
 
 
-    //Storing the letter provided by the user:-
-    public static String d1;
 
+    //Storing the letter provided by the user:-
+    private  String d1;
+
+    private String letter_needed;
 
     //Setting values at Rotor2 Slider:-(First need to check if will work nicely.)
 
@@ -94,14 +100,20 @@ public class EnigmaController implements Initializable {
         }
 
         EnterText.setText(""+d1);
+
+        //Setting d1 as the letter to be input in rotor1:-
+
     }
 
 
     //Outputs ciphertext:-
     public void generateCipher(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
-        String d1 = new String(EnterText.getText());
-        Ciphertext.setText(""+d1.toUpperCase());
+       // String d1 = new String(EnterText.getText());
+        ReflectorKey(Rotor3key); // Generating reflector or cipher key.
+        Ciphertext.setText(""+reflectorKey);
         EnterText.clear();
+        System.out.println("checking the first rotor: "+ Arrays.toString(r1.toArray()));
+        //ChangePositions(r1);
     }
 
 
@@ -116,10 +128,25 @@ public class EnigmaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 int value = (int) Rotor1.getValue();
+
                 if (letterByNumber.containsKey(value)) {
-                    String letter_needed = letterByNumber.get(value);
+
+                    letter_needed = letterByNumber.get(value);
+
+                    if(r1.contains(letter_needed)){
+
+                        letter_needed = r1.get(value);
+                    }
                     Rotor1Display.setText(letter_needed);
                 }
+
+
+                //Setting the values from UI to rotor 1:-
+                Rotor1Value(letter_needed);
+                rotor1Set(letter_needed);
+                //Thus we are getting encryption out of rotor1
+                System.out.println("1st rotor key: "+Rotor1key);
+
             }
         });
 
@@ -130,10 +157,26 @@ public class EnigmaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 int value = (int) Rotor2.getValue();
+
+                //Setting the rotor by sliding through the value:-
                 if (letterByNumber.containsKey(value)) {
-                    String letter_needed = letterByNumber.get(value);
+
+                    letter_needed = letterByNumber.get(value);
+
+                    if(r2.contains(letter_needed)){
+
+                        letter_needed = r2.get(value);
+                    }
                     Rotor2Display.setText(letter_needed);
                 }
+
+
+                //Setting the values from UI to rotor 2:-
+                Rotor2Value(Rotor1key);
+
+                //Thus we are getting encryption out of rotor1
+                System.out.println("2nd rotor key: "+Rotor2key);
+                //rotor1Set(letter_needed);
             }
         });
 
@@ -148,6 +191,12 @@ public class EnigmaController implements Initializable {
                     String letter_needed = letterByNumber.get(value);
                     Rotor3Display.setText(letter_needed);
                 }
+                //Setting the values from UI to rotor 3:-
+                Rotor3Value(Rotor2key);
+
+                //Thus we are getting encryption out of rotor1
+                System.out.println("3rd rotor key: "+Rotor3key);
+                //rotor1Set(letter_needed);
             }
         });
 
@@ -237,6 +286,8 @@ public class EnigmaController implements Initializable {
         valueFactory6B.setValue(" ");
         plugKey6B.setValueFactory(valueFactory6B);
 
+        Rotor1Value(letter_needed);
+        System.out.println("Checking the arrangement of elements in rotor1: "+Arrays.toString(r1.toArray()));
 
     /*
     //use spinners for rotors
