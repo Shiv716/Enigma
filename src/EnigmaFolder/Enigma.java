@@ -235,35 +235,37 @@ public class Enigma {
 
 
          // Substituted value for Input Key:-
-         public static void PlugboardOutput(){
+         public static void PlugboardOutput(String letter){
 
-             //object of the Scanner class
-             Scanner sc = new Scanner(System.in);
-             System.out.print("Enter the Letter: ");
-//invoking nextInt() method that reads an integer input by keyboard
-//storing the input number in a variable num
-             String letter = sc.next();
-//closing the Scanner after use
-             sc.close();
-             System.out.println("The letter you entered: " + letter.toUpperCase());
+//             //object of the Scanner class
+//             Scanner sc = new Scanner(System.in);
+//             System.out.print("Enter the Letter: ");
+////invoking nextInt() method that reads an integer input by keyboard
+////storing the input number in a variable num
+//              letter = sc.next();
+////closing the Scanner after use
+//             sc.close();
+//             System.out.println("The letter you entered: " + letter.toUpperCase());
 
 
                 //Setting input text as Plugboard key.
-             if(Plugboard.contains(letter.toUpperCase())){
+             Plugboardkey = letter.toUpperCase();
+
+             if(Plugboard.contains(letter)){
                  Plugboardkey = letter.toUpperCase();
                  //For Check:-
                  System.out.println("Your PlugboardKey:" + Plugboardkey);
 
              }
 
-             //Swapping the Plugboard keys:-
-             PlugboardKeys("B","X");
-             //Swapping the Plugboard keys:-
-             PlugboardKeys("A","C");
-             //Swapping the Plugboard keys:-
-             PlugboardKeys("K","L");
-             //For Check:-
-             System.out.println("Your new PlugboardKey:" + Plugboardkey);
+//             //Swapping the Plugboard keys:-
+//             PlugboardKeys("B","X");
+//             //Swapping the Plugboard keys:-
+//             PlugboardKeys("A","C");
+//             //Swapping the Plugboard keys:-
+//             PlugboardKeys("K","L");
+//             //For Check:-
+//             System.out.println("Your new PlugboardKey:" + Plugboardkey);
          }
 
 
@@ -499,8 +501,8 @@ public class Enigma {
         }
 
         public static void forwardRotation(){
-            //Working.
-            PlugboardOutput();
+            //Working all the objects to get the result cipher.
+            PlugboardOutput("a");
             Rotor1Value();
             System.out.println("Checking the plugboard key: "+ Plugboardkey);
             Rotor2Value();
@@ -510,7 +512,7 @@ public class Enigma {
 
     public static void main(String[] args) {
 
-                //forwardRotation();
+                forwardRotation();
 
            // Hence , all objects are working correctly.
 

@@ -80,7 +80,7 @@ public class EnigmaController implements Initializable {
 
 
     //Storing the letter provided by the user:-
-    private  String d1;
+    private static String d1;
 
     private String letter_needed;
 
@@ -90,6 +90,7 @@ public class EnigmaController implements Initializable {
 
 
     //Inputs letter from the user:-
+    //**PROBLEM IN RECORDING TEXT::--
     public void cipherInput(javafx.event.ActionEvent actionEvent) {
         try{
             d1 = EnterText.getText();
@@ -100,21 +101,48 @@ public class EnigmaController implements Initializable {
 
         EnterText.setText(""+d1);
 
-        //Setting d1 as the letter to be input in rotor1:-
-        d1 =Plugboardkey;
     }
 
+    public static void forwardRotation(){
+        //Working all the objects to get the result cipher.
+        PlugboardOutput(d1);
+        Rotor1Value();
+        System.out.println("Checking the plugboard key: "+ Plugboardkey);
+        Rotor2Value();
+        Rotor3Value();
+        ReflectorKey();
+    }
 
     //Outputs ciphertext:-
     public void generateCipher(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
        // String d1 = new String(EnterText.getText());
+
+        //Working all the objects to get the result cipher.
+
+        //forwardRotation();
+        System.out.println("Giving the plugboard key: "+Plugboardkey);
+        System.out.println("d1: "+EnterText.getText());
+
         ReflectorKey(); // Generating reflector or cipher key.
         Ciphertext.setText(""+reflectorKey);
         EnterText.clear();
         System.out.println("checking the first rotor: "+ Arrays.toString(r1.toArray()));
-        //ChangePositions(r1);
-    }
 
+
+
+        //NOW AFTER EVERY EXECUTION AND GENERATION OF A CIPHER , THE ROTORS WILL MOVE WHENEVER NEEDED TO :-
+        ChangePositions(r1);
+
+        //***CLARIFY THE ROTATIONS OF ROTORS:-
+
+        if(storedElements.size()==26){
+            ChangePositions(r2);
+        }
+        if(storedElements.size()==676){
+            ChangePositions(r2);
+            ChangePositions(r3);
+        }
+    }
 
 
     //To display Slider values in a Label.
@@ -129,24 +157,14 @@ public class EnigmaController implements Initializable {
                 int value = (int) Rotor1.getValue();
                 letter_needed = r1.get(value);
 
+                //Setting the values from UI to rotor 1:-
                 if (r1.contains(letter_needed)) {
 
                    letter_needed = r1.get(value);
 
                        Rotor1Display.setText(letter_needed);
 
-
                 }
-
-
-//                if(r1.contains(letter_needed)){
-//
-//                        letter_needed = r1.get(value);
-//                    }
-
-                //Setting the values from UI to rotor 1:-
-                //Rotor1Value(letter_needed);
-             //   rotor1Set(letter_needed);
 
 
                 //Thus we are getting encryption out of rotor1
@@ -165,15 +183,13 @@ public class EnigmaController implements Initializable {
                 int value = (int) Rotor2.getValue();
 
                 //Setting the rotor by sliding through the value:-
-                if (letterByNumber.containsKey(value)) {
+                if (r2.contains(letter_needed)) {
 
-                    letter_needed = letterByNumber.get(value);
+                    letter_needed = r2.get(value);
 
-//                    if(r2.contains(letter_needed)){
-//
-//                        letter_needed = r2.get(value);
-//                    }
                     Rotor2Display.setText(letter_needed);
+
+
                 }
 
 
@@ -193,10 +209,16 @@ public class EnigmaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 int value = (int) Rotor3.getValue();
-                if (letterByNumber.containsKey(value)) {
-                    String letter_needed = letterByNumber.get(value);
+
+                //Setting the rotor by sliding through the value:-
+                if (r3.contains(letter_needed)) {
+
+                    letter_needed = r3.get(value);
+
                     Rotor3Display.setText(letter_needed);
+
                 }
+
                 //Setting the values from UI to rotor 3:-
                 Rotor3Value();
 
@@ -204,6 +226,7 @@ public class EnigmaController implements Initializable {
                 System.out.println("3rd rotor key: "+Rotor3key);
                 //rotor1Set(letter_needed);
             }
+
         });
 
 
