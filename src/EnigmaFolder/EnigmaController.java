@@ -48,7 +48,6 @@ public class EnigmaController implements Initializable {
 
     //mapping them:-
     static{
-        letterByNumber.put(0," ");
         letterByNumber.put(1,"A");
         letterByNumber.put(2,"B");
         letterByNumber.put(3,"C");
@@ -102,14 +101,14 @@ public class EnigmaController implements Initializable {
         EnterText.setText(""+d1);
 
         //Setting d1 as the letter to be input in rotor1:-
-
+        d1 =Plugboardkey;
     }
 
 
     //Outputs ciphertext:-
     public void generateCipher(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
        // String d1 = new String(EnterText.getText());
-        ReflectorKey(Rotor3key); // Generating reflector or cipher key.
+        ReflectorKey(); // Generating reflector or cipher key.
         Ciphertext.setText(""+reflectorKey);
         EnterText.clear();
         System.out.println("checking the first rotor: "+ Arrays.toString(r1.toArray()));
@@ -128,23 +127,30 @@ public class EnigmaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 int value = (int) Rotor1.getValue();
+                letter_needed = r1.get(value);
 
-                if (letterByNumber.containsKey(value)) {
+                if (r1.contains(letter_needed)) {
 
-                    letter_needed = letterByNumber.get(value);
+                   letter_needed = r1.get(value);
 
-                    if(r1.contains(letter_needed)){
+                       Rotor1Display.setText(letter_needed);
 
-                        letter_needed = r1.get(value);
-                    }
-                    Rotor1Display.setText(letter_needed);
+
                 }
 
 
+//                if(r1.contains(letter_needed)){
+//
+//                        letter_needed = r1.get(value);
+//                    }
+
                 //Setting the values from UI to rotor 1:-
-                Rotor1Value(letter_needed);
-                rotor1Set(letter_needed);
+                //Rotor1Value(letter_needed);
+             //   rotor1Set(letter_needed);
+
+
                 //Thus we are getting encryption out of rotor1
+                Rotor1Value();
                 System.out.println("1st rotor key: "+Rotor1key);
 
             }
@@ -163,16 +169,16 @@ public class EnigmaController implements Initializable {
 
                     letter_needed = letterByNumber.get(value);
 
-                    if(r2.contains(letter_needed)){
-
-                        letter_needed = r2.get(value);
-                    }
+//                    if(r2.contains(letter_needed)){
+//
+//                        letter_needed = r2.get(value);
+//                    }
                     Rotor2Display.setText(letter_needed);
                 }
 
 
                 //Setting the values from UI to rotor 2:-
-                Rotor2Value(Rotor1key);
+                Rotor2Value();
 
                 //Thus we are getting encryption out of rotor1
                 System.out.println("2nd rotor key: "+Rotor2key);
@@ -192,7 +198,7 @@ public class EnigmaController implements Initializable {
                     Rotor3Display.setText(letter_needed);
                 }
                 //Setting the values from UI to rotor 3:-
-                Rotor3Value(Rotor2key);
+                Rotor3Value();
 
                 //Thus we are getting encryption out of rotor1
                 System.out.println("3rd rotor key: "+Rotor3key);
@@ -214,7 +220,7 @@ public class EnigmaController implements Initializable {
         //Spinners :
         SpinnerValueFactory<String> valueFactory1A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory1A.setValue(" ");
+        valueFactory1A.setValue("A");
 
         //Spinner 1A:-
         plugKey1A.setValueFactory(valueFactory1A);
@@ -223,70 +229,69 @@ public class EnigmaController implements Initializable {
         //Spinner 1B:-
         SpinnerValueFactory<String> valueFactory1B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory1B.setValue(" ");
+        valueFactory1B.setValue("A");
         plugKey1B.setValueFactory(valueFactory1B);
 
         //Spinner 2A:-
         SpinnerValueFactory<String> valueFactory2A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory2A.setValue(" ");
+        valueFactory2A.setValue("A");
         plugKey2A.setValueFactory(valueFactory2A);
 
         //Spinner 2B:-
         SpinnerValueFactory<String> valueFactory2B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory2B.setValue(" ");
+        valueFactory2B.setValue("A");
         plugKey2B.setValueFactory(valueFactory2B);
 
         //Spinner 3A:-
         SpinnerValueFactory<String> valueFactory3A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory3A.setValue(" ");
+        valueFactory3A.setValue("A");
         plugKey3A.setValueFactory(valueFactory3A);
 
         //Spinner 3B:-
         SpinnerValueFactory<String> valueFactory3B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory3B.setValue(" ");
+        valueFactory3B.setValue("A");
         plugKey3B.setValueFactory(valueFactory3B);
 
         //Spinner 4A:-
         SpinnerValueFactory<String> valueFactory4A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory4A.setValue(" ");
+        valueFactory4A.setValue("A");
         plugKey4A.setValueFactory(valueFactory4A);
 
         //Spinner 4B:-
         SpinnerValueFactory<String> valueFactory4B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory4B.setValue(" ");
+        valueFactory4B.setValue("A");
         plugKey4B.setValueFactory(valueFactory4B);
 
         //Spinner 5A:-
         SpinnerValueFactory<String> valueFactory5A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory5A.setValue(" ");
+        valueFactory5A.setValue("A");
         plugKey5A.setValueFactory(valueFactory5A);
 
         //Spinner 5B:-
         SpinnerValueFactory<String> valueFactory5B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory5B.setValue(" ");
+        valueFactory5B.setValue("A");
         plugKey5B.setValueFactory(valueFactory5B);
 
         //Spinner 6A:-
         SpinnerValueFactory<String> valueFactory6A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory6A.setValue(" ");
+        valueFactory6A.setValue("A");
         plugKey6A.setValueFactory(valueFactory6A);
 
         //Spinner 6B:-
         SpinnerValueFactory<String> valueFactory6B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
-        valueFactory6B.setValue(" ");
+        valueFactory6B.setValue("A");
         plugKey6B.setValueFactory(valueFactory6B);
 
-        Rotor1Value(letter_needed);
         System.out.println("Checking the arrangement of elements in rotor1: "+Arrays.toString(r1.toArray()));
 
     /*

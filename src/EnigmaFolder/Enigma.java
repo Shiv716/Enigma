@@ -76,7 +76,6 @@ public class Enigma {
 
             // For Rotor-1 values:-
             static {
-                r1.add(" ");
                 r1.add("E");
                 r1.add("K");
                 r1.add("M");
@@ -107,7 +106,6 @@ public class Enigma {
 
             // For Rotor-2 values:-
             static {
-                r2.add(" ");
                 r2.add("A");
                 r2.add("J");
                 r2.add("D");
@@ -138,7 +136,6 @@ public class Enigma {
 
             // For Rotor-3 values:-
             static {
-                r3.add(" ");
                 r3.add("V");
                 r3.add("Z");
                 r3.add("B");
@@ -296,7 +293,7 @@ public class Enigma {
 
 
          // We store rotor 1 substitution:-
-         public static void Rotor1Value(String letter_needed){
+         public static void Rotor1Value(){
              // For RotorValues:-
              //Consider the following list of substitutions for the rotor:-
               {
@@ -330,8 +327,8 @@ public class Enigma {
 
 
 
-             //Now setting the plugboard key as the letter needed:-
-             Plugboardkey= letter_needed;
+//             //Now setting the plugboard key as the letter needed:-
+//             Plugboardkey= letter_needed;
 
              if (RotorValues.containsKey(Plugboardkey)){
                  Rotor1key= RotorValues.get(Plugboardkey);
@@ -350,7 +347,7 @@ public class Enigma {
 
 
          // We store rotor 2 substitution:-
-         public static void Rotor2Value(String letter_needed){
+         public static void Rotor2Value(){
 
              // For RotorValues:-
              //Consider the following list of substitutions for the rotor:-
@@ -384,8 +381,8 @@ public class Enigma {
              }
 
 
-             //Now setting the rotor1 key as the letter needed:-
-             Rotor1key= letter_needed;
+//             //Now setting the rotor1 key as the letter needed:-
+//             Rotor1key= letter_needed;
 
              if (RotorValues.containsKey(Rotor1key)){
                  Rotor2key= RotorValues.get(Rotor1key);
@@ -402,7 +399,7 @@ public class Enigma {
 
 
          // We store rotor 3 substitution:-
-         public static void Rotor3Value(String letter_needed){
+         public static void Rotor3Value(){
 
              // For RotorValues:-
              //Consider the following list of substitutions for the rotor:-
@@ -435,8 +432,6 @@ public class Enigma {
                  RotorValues.put("Z",new String("K"));
              }
 
-             //Now setting the rotor2 key as the letter needed:-
-             Rotor2key= letter_needed;
 
              if (RotorValues.containsKey(Rotor2key)){
                  Rotor3key= RotorValues.get(Rotor2key);
@@ -491,10 +486,10 @@ public class Enigma {
 
 
          //Now we finally store reflector substitution:-
-         public static void ReflectorKey(String letter_needed){
+         public static void ReflectorKey(){
 
-             //Now setting the rotor1 key as the letter needed:-
-             Rotor3key= letter_needed;
+//             //Now setting the rotor1 key as the letter needed:-
+//             Rotor3key= letter_needed;
 
              if(Reflector.containsKey(Rotor3key)){
                  reflectorKey = Reflector.get(Rotor3key);
@@ -506,16 +501,16 @@ public class Enigma {
         public static void forwardRotation(){
             //Working.
             PlugboardOutput();
-            Rotor1Value(Plugboardkey);
+            Rotor1Value();
             System.out.println("Checking the plugboard key: "+ Plugboardkey);
-            Rotor2Value(Rotor1key);
-            Rotor3Value(Rotor2key);
-            ReflectorKey(Rotor3key);
+            Rotor2Value();
+            Rotor3Value();
+            ReflectorKey();
         }
 
     public static void main(String[] args) {
 
-                forwardRotation();
+                //forwardRotation();
 
            // Hence , all objects are working correctly.
 
@@ -530,9 +525,9 @@ public class Enigma {
         * Ask for clarity involving rotation of rotors.
         *  */
 
-        rotor1Set("L");
-        rotor2Set("S");
-        rotor3Set("M");
+//        rotor1Set("L");
+//        rotor2Set("S");
+//        rotor3Set("M");
     }
 }
 
