@@ -22,7 +22,7 @@ public class EnigmaController implements Initializable {
     public Label Rotor2Display;
     public Label Rotor3Display;
     public TextArea Ciphertext;
-    public TextField EnterText;
+    public TextArea EnterText;
     public Slider Rotor1;
     public Slider Rotor2;
     public Slider Rotor3;
@@ -44,6 +44,14 @@ public class EnigmaController implements Initializable {
     public Spinner <String> plugKey5B;
     public Spinner <String> plugKey6A;
     public Spinner <String> plugKey6B;
+    public Spinner <String> plugKey7A;
+    public Spinner <String> plugKey7B;
+    public Spinner <String> plugKey8A;
+    public Spinner <String> plugKey8B;
+    public Spinner <String> plugKey9A;
+    public Spinner <String> plugKey9B;
+    public Spinner <String> plugKey10A;
+    public Spinner <String> plugKey10B;
 
 
     // Spinner values:-
@@ -59,6 +67,15 @@ public class EnigmaController implements Initializable {
     public SpinnerValueFactory<String> key5B;
     public SpinnerValueFactory<String> key6A;
     public SpinnerValueFactory<String> key6B;
+    public SpinnerValueFactory<String> key7A;
+    public SpinnerValueFactory<String> key7B;
+    public SpinnerValueFactory<String> key8A;
+    public SpinnerValueFactory<String> key8B;
+    public SpinnerValueFactory<String> key9A;
+    public SpinnerValueFactory<String> key9B;
+    public SpinnerValueFactory<String> key10A;
+    public SpinnerValueFactory<String> key10B;
+
 
     //Creating hashmap for mapping numbers to letters to be used later:-
 
@@ -235,6 +252,42 @@ public class EnigmaController implements Initializable {
             String keyB = key6B.getValue();
             PlugboardKeys(keyA,keyB);
         }
+
+        // FOR PLUG-KEYS 7A AND 7B:-
+        key7A = plugKey7A.getValueFactory();
+        key7B = plugKey7B.getValueFactory();
+        if(!key7A.equals(key7B)){
+            String keyA = key7A.getValue();
+            String keyB = key7B.getValue();
+            PlugboardKeys(keyA,keyB);
+        }
+
+        // FOR PLUG-KEYS 8A AND 8B:-
+        key8A = plugKey8A.getValueFactory();
+        key8B = plugKey8B.getValueFactory();
+        if(!key8A.equals(key8B)){
+            String keyA = key8A.getValue();
+            String keyB = key8B.getValue();
+            PlugboardKeys(keyA,keyB);
+        }
+
+        // FOR PLUG-KEYS 9A AND 9B:-
+        key9A = plugKey9A.getValueFactory();
+        key9B = plugKey9B.getValueFactory();
+        if(!key9A.equals(key9B)){
+            String keyA = key9A.getValue();
+            String keyB = key9B.getValue();
+            PlugboardKeys(keyA,keyB);
+        }
+
+        // FOR PLUG-KEYS 10A AND 10B:-
+        key10A = plugKey10A.getValueFactory();
+        key10B = plugKey10B.getValueFactory();
+        if(!key10A.equals(key10B)){
+            String keyA = key10A.getValue();
+            String keyB = key10B.getValue();
+            PlugboardKeys(keyA,keyB);
+        }
     }
 
     //Just clear the text field:
@@ -356,6 +409,22 @@ public class EnigmaController implements Initializable {
         SpinnerValueFactory<String> valueFactory6A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
         //Spinner 6B:-
         SpinnerValueFactory<String> valueFactory6B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+        //Spinner 7A:-
+        SpinnerValueFactory<String> valueFactory7A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+        //Spinner 7B:-
+        SpinnerValueFactory<String> valueFactory7B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+        //Spinner 8A:-
+        SpinnerValueFactory<String> valueFactory8A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+        //Spinner 8B:-
+        SpinnerValueFactory<String> valueFactory8B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+        //Spinner 9A:-
+        SpinnerValueFactory<String> valueFactory9A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+        //Spinner 9B:-
+        SpinnerValueFactory<String> valueFactory9B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+        //Spinner 10B:-
+        SpinnerValueFactory<String> valueFactory10A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
+        //Spinner 10B:-
+        SpinnerValueFactory<String> valueFactory10B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
 
 
@@ -397,6 +466,30 @@ public class EnigmaController implements Initializable {
         //Spinner 6B:-
         valueFactory6B.setValue("A");
         plugKey6B.setValueFactory(valueFactory6B);
+        //Spinner 7A:-
+        valueFactory7A.setValue("A");
+        plugKey7A.setValueFactory(valueFactory7A);
+        //Spinner 7B:-
+        valueFactory7B.setValue("A");
+        plugKey7B.setValueFactory(valueFactory7B);
+        //Spinner 8A:-
+        valueFactory8A.setValue("A");
+        plugKey8A.setValueFactory(valueFactory8A);
+        //Spinner 8B:-
+        valueFactory8B.setValue("A");
+        plugKey8B.setValueFactory(valueFactory8B);
+        //Spinner 9A:-
+        valueFactory9A.setValue("A");
+        plugKey9A.setValueFactory(valueFactory9A);
+        //Spinner 9B:-
+        valueFactory9B.setValue("A");
+        plugKey9B.setValueFactory(valueFactory9B);
+        //Spinner 10A:-
+        valueFactory10A.setValue("A");
+        plugKey10A.setValueFactory(valueFactory10A);
+        //Spinner 10B:-
+        valueFactory10B.setValue("A");
+        plugKey10B.setValueFactory(valueFactory10B);
 
 
         /*
