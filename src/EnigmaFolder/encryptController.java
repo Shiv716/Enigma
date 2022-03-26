@@ -27,10 +27,10 @@ public class encryptController {
     public void encipher(ActionEvent actionEvent) throws IOException{
 
         //After the button is pressed!
-            EnigmaLabel.setText("Starting Enigma...");
+            EnigmaLabel.setText("Enigma Ready!");
             encrypting.setProgress(1);
 
-            if(cipher.getText().equals("Ready!")){
+            if(cipher.getText().equals("Open")){
                 Parent encrypt_1 = FXMLLoader.load(getClass().getResource("ENIGMA.fxml"));
                 Scene encrypt = new Scene(encrypt_1);
                 Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -40,6 +40,6 @@ public class encryptController {
             }
 
             //Only after this will Enigma Machine begin ;
-        cipher.setText("Ready!");
+        cipher.setText("Open");
     }
 }
