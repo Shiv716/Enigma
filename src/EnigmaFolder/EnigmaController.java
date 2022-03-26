@@ -1,15 +1,14 @@
 package EnigmaFolder;
 
-import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -17,18 +16,22 @@ import java.util.*;
 //Importing Enigma class objects:-
 import static EnigmaFolder.Enigma.Machine.*;
 
-
 public class EnigmaController implements Initializable {
 
     public Label Rotor1Display;
     public Label Rotor2Display;
     public Label Rotor3Display;
-    public Label  Ciphertext;
+    public TextArea Ciphertext;
     public TextField EnterText;
     public Slider Rotor1;
     public Slider Rotor2;
     public Slider Rotor3;
     public Button CipherGenerator;
+    public Button Rotor1Button;
+    public Button Rotor2Button;
+    public Button Rotor3Button;
+    public Button Clear;
+    public Button PlugkeyButton;
     public Spinner <String> plugKey1A;
     public Spinner <String> plugKey1B;
     public Spinner <String> plugKey2A;
@@ -41,6 +44,21 @@ public class EnigmaController implements Initializable {
     public Spinner <String> plugKey5B;
     public Spinner <String> plugKey6A;
     public Spinner <String> plugKey6B;
+
+
+    // Spinner values:-
+    public SpinnerValueFactory<String> key1A;
+    public SpinnerValueFactory<String> key1B;
+    public SpinnerValueFactory<String> key2A;
+    public SpinnerValueFactory<String> key2B;
+    public SpinnerValueFactory<String> key3A;
+    public SpinnerValueFactory<String> key3B;
+    public SpinnerValueFactory<String> key4A;
+    public SpinnerValueFactory<String> key4B;
+    public SpinnerValueFactory<String> key5A;
+    public SpinnerValueFactory<String> key5B;
+    public SpinnerValueFactory<String> key6A;
+    public SpinnerValueFactory<String> key6B;
 
     //Creating hashmap for mapping numbers to letters to be used later:-
 
@@ -80,70 +98,150 @@ public class EnigmaController implements Initializable {
 
 
     //Storing the letter provided by the user:-
-    private static String d1;
+    public String d1;
 
-    private String letter_needed;
-
-    //Setting values at Rotor2 Slider:-(First need to check if will work nicely.)
-
-    //Setting values at Rotor3 Slider:-(First need to check if will work nicely.)
+    private static String letter_needed;
 
 
     //Inputs letter from the user:-
-    //**PROBLEM IN RECORDING TEXT::--
+
     public void cipherInput(javafx.event.ActionEvent actionEvent) {
         try{
             d1 = EnterText.getText();
         }
         catch(Exception e){
-            System.out.println("Please enter Capital Letters only");
+            System.out.println("One Exception dodged!");
         }
 
         EnterText.setText(""+d1);
-
     }
 
-    public static void forwardRotation(){
-        //Working all the objects to get the result cipher.
-        PlugboardOutput(d1);
-        Rotor1Value();
-        System.out.println("Checking the plugboard key: "+ Plugboardkey);
-        Rotor2Value();
-        Rotor3Value();
-        ReflectorKey();
-    }
 
     //Outputs ciphertext:-
     public void generateCipher(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
-       // String d1 = new String(EnterText.getText());
 
-        //Working all the objects to get the result cipher.
+        //Setting text values to labels:
+        Rotor1Display.setText(r1.get(0));
+        Rotor2Display.setText(r2.get(0));
+        Rotor3Display.setText(r3.get(0));
 
-        //forwardRotation();
-        System.out.println("Giving the plugboard key: "+Plugboardkey);
-        System.out.println("d1: "+EnterText.getText());
+        stringElement=EnterText.getText();
 
-        ReflectorKey(); // Generating reflector or cipher key.
-        Ciphertext.setText(""+reflectorKey);
-        EnterText.clear();
-        System.out.println("checking the first rotor: "+ Arrays.toString(r1.toArray()));
-
-
-
-        //NOW AFTER EVERY EXECUTION AND GENERATION OF A CIPHER , THE ROTORS WILL MOVE WHENEVER NEEDED TO :-
-        ChangePositions(r1);
-
-        //***CLARIFY THE ROTATIONS OF ROTORS:-
-
-        if(storedElements.size()==26){
-            ChangePositions(r2);
+        if(EnterText.getText()!=null){
+            forwardRotation();
+        }else{
+            EnterText.setText(null);
         }
-        if(storedElements.size()==676){
-            ChangePositions(r2);
-            ChangePositions(r3);
+
+            //Gets the cipherText:-
+        // Generating reflector or cipher.
+            Ciphertext.setText("" + finalCipher);
+
+        //Setting on the ROTOR KNOBS so that we can initialize and change values if needed:-
+        Rotor1.setDisable(false);
+        Rotor2.setDisable(false);
+        Rotor3.setDisable(false);
+
+    }
+
+
+    //BUTTONS TO CHANGE ROTATIONS OF ROTORS:-
+    public void Rotor1Change(ActionEvent actionEvent) {
+
+        //Changing the orientation of rotor if button pressed:-
+            rotor1Set(letter_needed);
+            storedElements.clear();
+            Rotor1Value();
+            //Re-setting the knob at 0 after choosing value:
+            Rotor1.setValue(0);
+
+    }
+
+    public void Rotor2Change(ActionEvent actionEvent) {
+        //Changing the orientation of rotor if button pressed:-
+            rotor2Set(letter_needed);
+            storedElements.clear();
+            Rotor2Value();
+        //Re-setting the knob at 0 after choosing value:
+            Rotor2.setValue(0);
+    }
+
+    public void Rotor3Change(ActionEvent actionEvent) {
+        //Changing the orientation of rotor if button pressed:-
+            rotor3Set(letter_needed);
+            Rotor3Value();
+            storedElements.clear();
+        //Re-setting the knob at 0 after choosing value:
+            Rotor3.setValue(0);
+    }
+
+
+    //TO SWAP KEYS ON PLUGBOARD:-
+    public void PlugSwap(ActionEvent actionEvent) {
+        //MAKING OBJECTS FOR SWAPPING VALUES OF SPINNERS WHENEVER INTERACTED:
+
+        // FOR PLUG-KEYS 1A AND 1B:-
+        key1A = plugKey1A.getValueFactory();
+        key1B = plugKey1B.getValueFactory();
+        if(!key1A.equals(key1B)){
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
+            //For Verifying:- (WORKING!)
+            System.out.println("Plugboard orientation: "+Arrays.toString(Plugboard.toArray()));
+        }
+
+        // FOR PLUG-KEYS 2A AND 2B:-
+        key2A = plugKey2A.getValueFactory();
+        key2B = plugKey2B.getValueFactory();
+        if(!key2A.equals(key2B)){
+            String keyA = key2A.getValue();
+            String keyB = key2B.getValue();
+            PlugboardKeys(keyA,keyB);
+        }
+
+        // FOR PLUG-KEYS 3A AND 3B:-
+        key3A = plugKey3A.getValueFactory();
+        key3B = plugKey3B.getValueFactory();
+        if(!key3A.equals(key3B)){
+            String keyA = key3A.getValue();
+            String keyB = key3B.getValue();
+            PlugboardKeys(keyA,keyB);
+        }
+
+        // FOR PLUG-KEYS 4A AND 4B:-
+        key4A = plugKey4A.getValueFactory();
+        key4B = plugKey4B.getValueFactory();
+        if(!key4A.equals(key4B)){
+            String keyA = key4A.getValue();
+            String keyB = key4B.getValue();
+            PlugboardKeys(keyA,keyB);
+        }
+
+        // FOR PLUG-KEYS 5A AND 5B:-
+        key5A = plugKey5A.getValueFactory();
+        key5B = plugKey5B.getValueFactory();
+        if(!key5A.equals(key5B)){
+            String keyA = key5A.getValue();
+            String keyB = key5B.getValue();
+            PlugboardKeys(keyA,keyB);
+        }
+
+        // FOR PLUG-KEYS 6A AND 6B:-
+        key6A = plugKey6A.getValueFactory();
+        key6B = plugKey6B.getValueFactory();
+        if(!key6A.equals(key6B)){
+            String keyA = key6A.getValue();
+            String keyB = key6B.getValue();
+            PlugboardKeys(keyA,keyB);
         }
     }
 
+    //Just clear the text field:
+    public void ClearButton(ActionEvent actionEvent) {
+        Ciphertext.clear();
+        finalCipher=""; // To empty the storage string for Cipher.
+    }
 
     //To display Slider values in a Label.
     @Override
@@ -154,24 +252,24 @@ public class EnigmaController implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+
                 int value = (int) Rotor1.getValue();
-                letter_needed = r1.get(value);
+                Rotor1.setValue((value));
 
-                //Setting the values from UI to rotor 1:-
-                if (r1.contains(letter_needed)) {
-
-                   letter_needed = r1.get(value);
-
-                       Rotor1Display.setText(letter_needed);
-
+                //Disabling the slider after 1 shift to ensure not over shifting
+                Rotor1.setDisable(true);
+                try{
+                    letter_needed = r1.get(value);
+                    //Setting the values from UI to rotor 1:-
+                    Rotor1Display.setText(letter_needed);
+                    System.out.println("1st rotor key: " + Rotor1key);
+                }
+                catch(Exception e){
+                    System.out.println("Index out of Bounds error dodged!");
                 }
 
-
-                //Thus we are getting encryption out of rotor1
-                Rotor1Value();
-                System.out.println("1st rotor key: "+Rotor1key);
-
             }
+
         });
 
 
@@ -181,25 +279,21 @@ public class EnigmaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 int value = (int) Rotor2.getValue();
+                Rotor2.setValue((value));
+                //Disabling the slider after 1 shift to ensure not over shifting
+                Rotor2.setDisable(true);
 
-                //Setting the rotor by sliding through the value:-
-                if (r2.contains(letter_needed)) {
-
+                try{
                     letter_needed = r2.get(value);
-
+                    //Setting the values from UI to rotor 2:-
                     Rotor2Display.setText(letter_needed);
 
-
+                }
+                catch(Exception e){
+                    System.out.println("Index out of Bounds error dodged!");
+                }
                 }
 
-
-                //Setting the values from UI to rotor 2:-
-                Rotor2Value();
-
-                //Thus we are getting encryption out of rotor1
-                System.out.println("2nd rotor key: "+Rotor2key);
-                //rotor1Set(letter_needed);
-            }
         });
 
 
@@ -209,28 +303,24 @@ public class EnigmaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 int value = (int) Rotor3.getValue();
+                Rotor3.setValue((value));
+                //Disabling the slider after 1 shift to ensure not over shifting
+                Rotor3.setDisable(true);
 
-                //Setting the rotor by sliding through the value:-
-                if (r3.contains(letter_needed)) {
-
+                try {
                     letter_needed = r3.get(value);
-
+                    //Setting the values from UI to rotor 3:-
                     Rotor3Display.setText(letter_needed);
 
+                } catch (Exception e) {
+                    System.out.println("Index out of Bounds error dodged!");
                 }
-
-                //Setting the values from UI to rotor 3:-
-                Rotor3Value();
-
-                //Thus we are getting encryption out of rotor1
-                System.out.println("3rd rotor key: "+Rotor3key);
-                //rotor1Set(letter_needed);
             }
 
         });
 
 
-        //USER GETS 6 PLUGBOARD KEYS TO SWAP THE VALUES SO 6 OPTIONS TO CHOOSE FROM IF WANTED
+        //USER GETS 6 PLUG-BOARD KEYS TO SWAP THE VALUES SO 6 OPTIONS TO CHOOSE FROM IF WANTED
         // - FOR ADDING CHANGING VALUES BEFORE THE ELEMENT ENTERS THE ROTORS.
 
         //Making the spinners:-
@@ -241,87 +331,84 @@ public class EnigmaController implements Initializable {
 
 
         //Spinners :
-        SpinnerValueFactory<String> valueFactory1A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory1A.setValue("A");
 
         //Spinner 1A:-
-        plugKey1A.setValueFactory(valueFactory1A);
-        //LIKEWISE:-
-
+        SpinnerValueFactory<String> valueFactory1A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
         //Spinner 1B:-
         SpinnerValueFactory<String> valueFactory1B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory1B.setValue("A");
-        plugKey1B.setValueFactory(valueFactory1B);
-
         //Spinner 2A:-
         SpinnerValueFactory<String> valueFactory2A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory2A.setValue("A");
-        plugKey2A.setValueFactory(valueFactory2A);
-
         //Spinner 2B:-
         SpinnerValueFactory<String> valueFactory2B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory2B.setValue("A");
-        plugKey2B.setValueFactory(valueFactory2B);
-
         //Spinner 3A:-
         SpinnerValueFactory<String> valueFactory3A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory3A.setValue("A");
-        plugKey3A.setValueFactory(valueFactory3A);
-
         //Spinner 3B:-
         SpinnerValueFactory<String> valueFactory3B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory3B.setValue("A");
-        plugKey3B.setValueFactory(valueFactory3B);
-
         //Spinner 4A:-
         SpinnerValueFactory<String> valueFactory4A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory4A.setValue("A");
-        plugKey4A.setValueFactory(valueFactory4A);
-
         //Spinner 4B:-
         SpinnerValueFactory<String> valueFactory4B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory4B.setValue("A");
-        plugKey4B.setValueFactory(valueFactory4B);
-
         //Spinner 5A:-
         SpinnerValueFactory<String> valueFactory5A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory5A.setValue("A");
-        plugKey5A.setValueFactory(valueFactory5A);
-
         //Spinner 5B:-
         SpinnerValueFactory<String> valueFactory5B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory5B.setValue("A");
-        plugKey5B.setValueFactory(valueFactory5B);
-
         //Spinner 6A:-
         SpinnerValueFactory<String> valueFactory6A = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
-
-        valueFactory6A.setValue("A");
-        plugKey6A.setValueFactory(valueFactory6A);
-
         //Spinner 6B:-
         SpinnerValueFactory<String> valueFactory6B = new SpinnerValueFactory.ListSpinnerValueFactory<String>(justLetters);
 
+
+
+        //Now setting initial values to them:-
+
+        //Spinner 1A:
+        valueFactory1A.setValue("A");
+        plugKey1A.setValueFactory(valueFactory1A);
+        //Spinner 1B:
+        valueFactory1B.setValue("A");
+        plugKey1B.setValueFactory(valueFactory1B);
+        //Spinner 2A:
+        valueFactory2A.setValue("A");
+        plugKey2A.setValueFactory(valueFactory2A);
+        //Spinner 2B:
+        valueFactory2B.setValue("A");
+        plugKey2B.setValueFactory(valueFactory2B);
+        //Spinner 3A:
+        valueFactory3A.setValue("A");
+        plugKey3A.setValueFactory(valueFactory3A);
+        //Spinner 3B:
+        valueFactory3B.setValue("A");
+        plugKey3B.setValueFactory(valueFactory3B);
+        //Spinner 4A:
+        valueFactory4A.setValue("A");
+        plugKey4A.setValueFactory(valueFactory4A);
+        //Spinner 4B:
+        valueFactory4B.setValue("A");
+        plugKey4B.setValueFactory(valueFactory4B);
+        //Spinner 5A:
+        valueFactory5A.setValue("A");
+        plugKey5A.setValueFactory(valueFactory5A);
+        //Spinner 5B:
+        valueFactory5B.setValue("A");
+        plugKey5B.setValueFactory(valueFactory5B);
+        //Spinner 6A:-
+        valueFactory6A.setValue("A");
+        plugKey6A.setValueFactory(valueFactory6A);
+        //Spinner 6B:-
         valueFactory6B.setValue("A");
         plugKey6B.setValueFactory(valueFactory6B);
 
-        System.out.println("Checking the arrangement of elements in rotor1: "+Arrays.toString(r1.toArray()));
 
-    /*
-    //use spinners for rotors
-    // - and then assign letters to the textfield
-     - Give 6 plugboard key options as spinners or menu box
-    // Use Enigma file to complete the architecture.
-     */
+        /*
+        NOTES:-
+        LOOK OUT FOR STORED ELEMENTS ARRAY , NOT TO MANIPULATE TOTAL ROTATION OF ROTORS.
+        - ASK IF THE ROTATION SEQUENCE IS OKAY OR NOT?
+        - ASK IF ENCRYPTION IS SYMMETRIC OR NOT?
+         */
+
     }
+
+    public void CipherOutput(MouseEvent mouseEvent) {
+    }
+
 }
