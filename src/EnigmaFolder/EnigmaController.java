@@ -145,10 +145,14 @@ public class EnigmaController implements Initializable {
 
         stringElement=EnterText.getText();
 
+        try{
         if(EnterText.getText()!=null){
             getCipher();
         }else{
             EnterText.setText(null);
+        }
+        }catch (Exception e) {
+            System.out.println("Please input only letters.");
         }
 
             //Gets the cipherText:-

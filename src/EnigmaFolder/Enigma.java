@@ -542,8 +542,8 @@ public class Enigma {
                     if (storedElements.size() % 26 == 0) {
                         ChangePositions(r2);
                     }
+
                     if (storedElements.size() % 676 == 0) {
-                        ChangePositions(r2);
                         ChangePositions(r3);
 
                         System.out.println(storedElements.size());
