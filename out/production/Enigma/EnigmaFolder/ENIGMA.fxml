@@ -94,17 +94,17 @@
             <Spinner fx:id="plugKey5B" layoutX="547.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
             <Spinner fx:id="plugKey6A" layoutX="480.0" layoutY="257.0" prefHeight="26.0" prefWidth="54.0" />
             <Spinner fx:id="plugKey6B" layoutX="548.0" layoutY="257.0" prefHeight="26.0" prefWidth="54.0" />
-            <Button fx:id="Rotor1Button" layoutX="98.0" layoutY="52.0" mnemonicParsing="false" onAction="#Rotor1Change" prefHeight="27.0" prefWidth="94.0" text="CLICK ME!" textFill="#1c0ee5">
+            <Button fx:id="Rotor1Button" layoutX="98.0" layoutY="45.0" mnemonicParsing="false" onAction="#Rotor1Change" prefHeight="27.0" prefWidth="94.0" text="CLICK ME!" textFill="#1c0ee5">
                <font>
                   <Font name="AppleMyungjo Regular" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="Rotor2Button" layoutX="98.0" layoutY="131.0" mnemonicParsing="false" onAction="#Rotor2Change" prefHeight="17.0" prefWidth="94.0" text="CLICK ME!" textFill="#1c0ee5">
+            <Button fx:id="Rotor2Button" layoutX="98.0" layoutY="124.0" mnemonicParsing="false" onAction="#Rotor2Change" prefHeight="17.0" prefWidth="94.0" text="CLICK ME!" textFill="#1c0ee5">
                <font>
                   <Font name="AppleMyungjo Regular" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="Rotor3Button" layoutX="97.0" layoutY="215.0" mnemonicParsing="false" onAction="#Rotor3Change" prefHeight="26.0" prefWidth="94.0" text="CLICK ME!" textFill="#1c0ee5">
+            <Button fx:id="Rotor3Button" layoutX="97.0" layoutY="208.0" mnemonicParsing="false" onAction="#Rotor3Change" prefHeight="26.0" prefWidth="94.0" text="CLICK ME!" textFill="#1c0ee5">
                <font>
                   <Font name="AppleMyungjo Regular" size="13.0" />
                </font>

@@ -3,7 +3,6 @@ package EnigmaFolder;
 // Start with one rotor , reflector and plugboard.
 
 import com.google.common.primitives.Chars;
-import javafx.scene.control.ListView;
 
 import java.util.*;
 
@@ -22,10 +21,13 @@ public class Enigma {
         public static String Rotor1key;
         public static String Rotor2key;
         public static String Rotor3key;
-        //Stores cipherText:-
+        public static String Rotor1keyBackward;
+        public static String Rotor2keyBackward;
+        public static String Rotor3keyBackward;
+        public static String PlugboardValueBackward;
         public static String reflectorKey;
 
-        //Mapping the RotorValues for every element of Rotor:-
+        //Mapping the RotorValues for every element of Rotor (For referencing the rotor value with original letter positions):-
         public static HashMap<String, String> RotorValues = new HashMap<String, String>();
 
         //First Rotor:-
@@ -234,15 +236,14 @@ public class Enigma {
 
         // Substituted value for Input Key:-
         public static void PlugboardOutput(String letter) {
-
             //Setting Plugboard key.
-            if (OriginalPlugboard.contains(letter.toUpperCase())) {
+            if (Plugboard.contains(letter.toUpperCase())) {
                 int index = OriginalPlugboard.indexOf(letter.toUpperCase());
                 Plugboardkey = Plugboard.get(index);
                 System.out.println("Plugboard key: " + Plugboardkey);
-
             }
         }
+
 
         //This object rotates the rotor to set in the given element as first letter:-
         public static void rotor1Set(String j) {
@@ -302,9 +303,10 @@ public class Enigma {
 
 
         // We store rotor 1 substitution:-
-        public static void Rotor1Value() {
+        public static void Rotor1ValueForward() {
             // For RotorValues:-
             //Consider the following list of substitutions for the rotor:-
+            //(Just for Reference: )
             {
                 RotorValues.put("A", new String("E"));
                 RotorValues.put("B", new String("K"));
@@ -335,22 +337,20 @@ public class Enigma {
             }
 
             int index = OriginalPlugboard.indexOf(Plugboardkey);//Storing input element's index
-            String element = r1.get(index);//Making an element for substitution for previous key inside this rotor
-            // ENSURING THE ENCRYPTION OF SAME LETTER CHANGES ON ROTOR ROTATION.
-            Rotor1key = RotorValues.get(element); // Finally substituting the value
+            Rotor1key = r1.get(index);//Making substitution
             //For Check:-
             System.out.println("index: " + index);
-            System.out.println("element: " + element);
             System.out.println("Your supposed Rotor1 substitution:" + Rotor1key);
 
         }
 
 
         // We store rotor 2 substitution:-
-        public static void Rotor2Value() {
+        public static void Rotor2ValueForward() {
 
             // For RotorValues:-
             //Consider the following list of substitutions for the rotor:-
+            //(Just for Reference: )
             {
                 RotorValues.put("A", new String("A"));
                 RotorValues.put("B", new String("J"));
@@ -380,23 +380,20 @@ public class Enigma {
                 RotorValues.put("Z", new String("E"));
             }
 
-            int index = r1.indexOf(Rotor1key); //Storing input element's index
-            String element = r2.get(index); //Making an element for substitution for previous key inside this rotor
-            // ENSURING THE ENCRYPTION OF SAME LETTER CHANGES ON ROTOR ROTATION.
-            Rotor2key = RotorValues.get(element); // Finally substituting the value
+            int index = OriginalPlugboard.indexOf(Rotor1key); //Storing input element's index
+            Rotor2key = r2.get(index); //Making substitution
             //For Check:-
             System.out.println("index: " + index);
-            System.out.println("element: " + element);
             System.out.println("Your supposed Rotor2 substitution:" + Rotor2key);
         }
 
 
 
         // We store rotor 3 substitution:-
-        public static void Rotor3Value() {
-
+        public static void Rotor3ValueForward() {
             // For RotorValues:-
             //Consider the following list of substitutions for the rotor:-
+            // (Just for Reference)
             {
                 RotorValues.put("A", new String("V"));
                 RotorValues.put("B", new String("Z"));
@@ -426,12 +423,10 @@ public class Enigma {
                 RotorValues.put("Z", new String("K"));
             }
 
-
-            int index = r2.indexOf(Rotor2key);//Storing input element's index
-            String element = r3.get(index); //Making an element for substitution for previous key inside this rotor
-            // ENSURING THE ENCRYPTION OF SAME LETTER CHANGES ON ROTOR ROTATION.
-            Rotor3key = RotorValues.get(element);// Finally substituting the value
+            int index = OriginalPlugboard.indexOf(Rotor2key);//Storing input element's index
+            Rotor3key = r3.get(index); //Making substitution
             //For Check:-
+            System.out.println("Index : " +index);
             System.out.println("Your supposed Rotor3 substitution:" + Rotor3key);
         }
 
@@ -475,28 +470,68 @@ public class Enigma {
 
         //Now we finally store reflector substitution:-
         public static void ReflectorKey() {
-
             reflectorKey = Reflector.get(Rotor3key);
             System.out.println("Thus , your cipherLetter : " + reflectorKey);
 
         }
 
+        //Reverts back important key (reverse value) of Rotor3Key
+        public static void Rotor3valueBackward() {
+
+            int index = r3.indexOf(reflectorKey); //Storing the element considering index
+            Rotor3keyBackward = OriginalPlugboard.get(index);// Getting final substitution
+            //For verifying:-
+            System.out.println("Rotor 3 key reverse: "+Rotor3keyBackward);
+        }
+
+        //Reverts back important key (reverse value) of Rotor2Key
+        public static void Rotor2valueBackward() {
+            int index = r2.indexOf(Rotor3keyBackward); //Storing the element considering index
+            Rotor2keyBackward = OriginalPlugboard.get(index); // Getting final substitution
+            //For verifying:-
+            System.out.println("Rotor 2 key reverse: "+Rotor2keyBackward);
+        }
+
+        //Reverts back important key (reverse value) of Rotor1Key
+        public static void Rotor1valueBackward() {
+
+            int index = r1.indexOf(Rotor2keyBackward); //Storing the element considering index
+            Rotor1keyBackward = OriginalPlugboard.get(index);// Getting final substitution
+            //For verifying:-
+            System.out.println("Rotor 1 key reverse: "+Rotor1keyBackward);
+        }
+
+
+        //Reverts back important key (reverse value) of Plugboardkey
+        public static void PlugboardvalueBackward() {
+
+            int index =OriginalPlugboard.indexOf(Rotor1keyBackward); //Storing the element considering index
+           PlugboardValueBackward = Plugboard.get(index);// Getting final substitution
+            //For verifying:-
+            System.out.println("Plugboard value reverse: "+ PlugboardValueBackward);
+
+            //Thus final cipher letter : PlugboardValueBackward;
+        }
+
 
         //Working all the objects to get the result cipher :
-        public static void forwardRotation() {
+        public static void getCipher() {
 
             chars = Chars.asList(stringElement.toCharArray());
-
             for (int i = 0; i < chars.size(); i++) {
                 if (stringElement != null) {
                     PlugboardOutput(String.valueOf(chars.get(i)));
-                    Rotor1Value();
-                    Rotor2Value();
-                    Rotor3Value();
+                    Rotor1ValueForward();
+                    Rotor2ValueForward();
+                    Rotor3ValueForward();
                     ReflectorKey();
+                    Rotor3valueBackward();
+                    Rotor2valueBackward();
+                    Rotor1valueBackward();
+                    PlugboardvalueBackward();
 
                     //GIVES OUT FINAL CIPHER SENTENCE:-
-                    finalCipher = finalCipher.concat(reflectorKey);
+                    finalCipher = finalCipher.concat(PlugboardValueBackward);
 
                     //NOW AFTER EVERY EXECUTION AND GENERATION OF A CIPHER , THE ROTORS WILL MOVE WHENEVER NEEDED TO :-
                     ChangePositions(r1);

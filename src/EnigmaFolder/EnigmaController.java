@@ -82,6 +82,7 @@ public class EnigmaController implements Initializable {
     public static HashMap<Integer,String> letterByNumber= new HashMap<Integer,String>();
 
     //mapping them:-
+    //Specially for setting spinner values:
     static{
         letterByNumber.put(1,"A");
         letterByNumber.put(2,"B");
@@ -145,7 +146,7 @@ public class EnigmaController implements Initializable {
         stringElement=EnterText.getText();
 
         if(EnterText.getText()!=null){
-            forwardRotation();
+            getCipher();
         }else{
             EnterText.setText(null);
         }
@@ -168,17 +169,14 @@ public class EnigmaController implements Initializable {
         //Changing the orientation of rotor if button pressed:-
             rotor1Set(letter_needed);
             storedElements.clear();
-            Rotor1Value();
             //Re-setting the knob at 0 after choosing value:
             Rotor1.setValue(0);
-
     }
 
     public void Rotor2Change(ActionEvent actionEvent) {
         //Changing the orientation of rotor if button pressed:-
             rotor2Set(letter_needed);
             storedElements.clear();
-            Rotor2Value();
         //Re-setting the knob at 0 after choosing value:
             Rotor2.setValue(0);
     }
@@ -186,7 +184,6 @@ public class EnigmaController implements Initializable {
     public void Rotor3Change(ActionEvent actionEvent) {
         //Changing the orientation of rotor if button pressed:-
             rotor3Set(letter_needed);
-            Rotor3Value();
             storedElements.clear();
         //Re-setting the knob at 0 after choosing value:
             Rotor3.setValue(0);
