@@ -519,12 +519,10 @@ public class Enigma {
 
             chars = Chars.asList(stringElement.toCharArray());
             for (int i = 0; i < chars.size(); i++) {
+                //Making sure the element from char is not free space;
                 Character c = chars.get(i);
                 String s = String.valueOf(c);
-                if(s.equals(" ")){
-                    finalCipher.concat(" ");
-                }
-                else if (stringElement != null) {
+                if (stringElement != null && !s.equals(" ")) {
                     PlugboardOutput(String.valueOf(chars.get(i)));
                     Rotor1ValueForward();
                     Rotor2ValueForward();
