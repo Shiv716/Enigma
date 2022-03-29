@@ -143,11 +143,12 @@ public class EnigmaController implements Initializable {
         Rotor2Display.setText(r2.get(0));
         Rotor3Display.setText(r3.get(0));
 
-        stringElement=EnterText.getText();
+        //  Setting the input from user to pass into functional object:-
+        stringElement = EnterText.getText();
 
         try{
         if(EnterText.getText()!=null){
-            getCipher();
+            getCipher(); // Calling the function to get cipher;
         }else{
             EnterText.setText(null);
         }
@@ -156,7 +157,6 @@ public class EnigmaController implements Initializable {
         }
 
             //Gets the cipherText:-
-        // Generating reflector or cipher.
             Ciphertext.setText("" + finalCipher);
 
         //Setting on the ROTOR KNOBS so that we can initialize and change values if needed:-

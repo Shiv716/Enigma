@@ -522,6 +522,7 @@ public class Enigma {
                 //Making sure the element from char is not free space;
                 Character c = chars.get(i);
                 String s = String.valueOf(c);
+                //BELOW WE MAKING SURE TO FILTER AND ENCIPHER JUST LETTERS FROM INPUT:-
                 if (stringElement != null && !s.equals(" ")) {
                     PlugboardOutput(String.valueOf(chars.get(i)));
                     Rotor1ValueForward();
@@ -537,18 +538,21 @@ public class Enigma {
                     finalCipher = finalCipher.concat(PlugboardValueBackward);
 
                     //NOW AFTER EVERY EXECUTION AND GENERATION OF A CIPHER , THE ROTORS WILL MOVE WHENEVER NEEDED TO :-
-                    ChangePositions(r1);
-
+                    ChangePositions(r1);// WILL ROTATE ALWAYS
+                    if(storedElements.size() % 676 == 0){
+                        ChangePositions(r3); // WILL ROTATE AFTER EVERY ONE CYCLE OF EXECUTION OF ROTOR2
+                    }
                     if (storedElements.size() % 26 == 0) {
-                        ChangePositions(r2);
+                        ChangePositions(r2); // WILL ROTATE AFTER EVERY ONE CYCLE OF EXECUTION OF ROTOR 1
                     }
-
-                    if (storedElements.size() % 676 == 0) {
-                        ChangePositions(r3);
-
-                        System.out.println(storedElements.size());
+                    //Making sure to limit encryption until 26*26*26 encryptions;
+                    if(storedElements.size()==676*26){
+                        storedElements.clear();
+                        System.out.println("Encryption terminated!");
+                        System.out.println("Now it will need to restart.");
                     }
-                } else {
+                }
+                else {
                     System.out.println("null");
                 }
             }
