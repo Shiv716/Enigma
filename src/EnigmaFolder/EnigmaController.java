@@ -492,16 +492,9 @@ public class EnigmaController implements Initializable {
         valueFactory10B.setValue("A");
         plugKey10B.setValueFactory(valueFactory10B);
 
-
-        /*
-        NOTES:-
-        LOOK OUT FOR STORED ELEMENTS ARRAY , NOT TO MANIPULATE TOTAL ROTATION OF ROTORS.
-        - ASK IF THE ROTATION SEQUENCE IS OKAY OR NOT?
-        - ASK IF ENCRYPTION IS SYMMETRIC OR NOT?
-         */
-
     }
 
+    //Un-used method of output field , but necessary to be declared.
     public void CipherOutput(MouseEvent mouseEvent) {
     }
 
