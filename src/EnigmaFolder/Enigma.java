@@ -1,13 +1,8 @@
 package EnigmaFolder;
 
-// Start with one rotor , reflector and plugboard.
-
 import com.google.common.primitives.Chars;
 
 import java.util.*;
-
-//import static EnigmaApp.Enigma.Machine.*;
-import static EnigmaFolder.Enigma.Machine.*;
 
 public class Enigma {
 
