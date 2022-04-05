@@ -46,7 +46,7 @@
                   <Image url="@leather.jpg" />
                </image>
             </ImageView>
-            <Label fx:id="EnigmaLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="204.0" layoutY="73.0" prefHeight="43.0" prefWidth="193.0" text="Begin... ?" textAlignment="JUSTIFY" textFill="WHITE">
+            <Label fx:id="EnigmaLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="204.0" layoutY="73.0" prefHeight="43.0" prefWidth="193.0" text="Begin... ?" textAlignment="JUSTIFY" textFill="WHITE" underline="true">
                <font>
                   <Font name="American Typewriter" size="24.0" />
                </font>
