@@ -33,23 +33,29 @@
 -->
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <VBox prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EnigmaFolder.encryptController">
   <children>
-    <AnchorPane fx:id="encrypt" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="encrypt" maxHeight="-1.0" maxWidth="-1.0" prefHeight="269.0" prefWidth="532.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label fx:id="EnigmaLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="204.0" layoutY="36.0" prefHeight="43.0" prefWidth="193.0" text="Begin... ?" textAlignment="JUSTIFY" textFill="#1aab1a">
+            <ImageView fitHeight="458.0" fitWidth="641.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@leather.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="EnigmaLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="204.0" layoutY="73.0" prefHeight="43.0" prefWidth="193.0" text="Begin... ?" textAlignment="JUSTIFY" textFill="WHITE">
                <font>
                   <Font name="American Typewriter" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="cipher" layoutX="258.0" layoutY="131.0" mnemonicParsing="false" onAction="#encipher" prefHeight="20.0" prefWidth="85.0" text="Start ?" textFill="#1151da" underline="true">
+            <Button fx:id="cipher" layoutX="258.0" layoutY="182.0" mnemonicParsing="false" onAction="#encipher" prefHeight="20.0" prefWidth="85.0" text="Start ?" textFill="#970b10" underline="true">
                <font>
                   <Font name="Chalkduster" size="14.0" />
                </font></Button>
-            <ProgressBar fx:id="encrypting" layoutX="200.0" layoutY="90.0" prefWidth="200.0" progress="0.0" />
+            <ProgressBar fx:id="encrypting" layoutX="177.0" layoutY="132.0" prefHeight="28.0" prefWidth="246.0" progress="0.0" />
       </children>
     </AnchorPane>
   </children>

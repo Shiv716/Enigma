@@ -32,113 +32,154 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="620.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EnigmaFolder.EnigmaController">
+<VBox prefHeight="620.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EnigmaFolder.EnigmaController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="700.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="628.0" prefWidth="635.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="28.0" layoutY="328.0" prefHeight="34.0" prefWidth="58.0" text="Enter : " underline="true">
+            <ImageView fitHeight="632.0" fitWidth="1184.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@leather.jpg" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="48.0" layoutY="332.0" prefHeight="34.0" prefWidth="77.0" text="Enter : " textAlignment="CENTER" textFill="WHITE" underline="true">
                <font>
                   <Font name="American Typewriter" size="14.0" />
-               </font></Label>
-            <Label layoutX="14.0" layoutY="70.0" text="ROTOR 1 :" />
-            <Label layoutX="13.0" layoutY="146.0" text="ROTOR 2 :" />
-            <Label layoutX="13.0" layoutY="233.0" text="ROTOR 3 :" />
-            <Label alignment="CENTER" layoutX="18.0" layoutY="463.0" prefHeight="34.0" prefWidth="77.0" text="CIPHER :" textFill="#0d3ce8" underline="true">
+               </font>
+            </Label>
+            <Label layoutX="64.0" layoutY="89.0" text="ROTOR 1 :" textFill="WHITE">
                <font>
-                  <Font name="Heiti TC Light" size="14.0" />
-               </font></Label>
-            <Button fx:id="CipherGenerator" layoutX="177.0" layoutY="572.0" mnemonicParsing="false" onAction="#generateCipher" prefHeight="34.0" prefWidth="199.0" text="Generate Cipher" textFill="#ad1f1f">
+                  <Font name="American Typewriter" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="64.0" layoutY="166.0" text="ROTOR 2 :" textFill="WHITE">
                <font>
-                  <Font name="Futura Medium" size="16.0" />
-               </font></Button>
-            <Label fx:id="Rotor1Display" alignment="CENTER" layoutX="124.0" layoutY="85.0" prefHeight="26.0" prefWidth="40.0" underline="true">
+                  <Font name="American Typewriter" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="64.0" layoutY="230.0" prefHeight="17.0" prefWidth="63.0" text="ROTOR 3 :" textFill="WHITE">
+               <font>
+                  <Font name="American Typewriter" size="13.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="48.0" layoutY="460.0" prefHeight="34.0" prefWidth="77.0" text="CIPHER :" textFill="#d8d9dd" underline="true">
+               <font>
+                  <Font name="American Typewriter" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="CipherGenerator" layoutX="234.0" layoutY="574.0" mnemonicParsing="false" onAction="#generateCipher" prefHeight="34.0" prefWidth="199.0" text="Generate Cipher" textFill="#ad1f1f">
+               <font>
+                  <Font name="American Typewriter" size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="Rotor1Display" alignment="CENTER" layoutX="357.0" layoutY="85.0" prefHeight="26.0" prefWidth="40.0" textFill="#fcf9f9" underline="true">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
-               </font></Label>
-            <Label fx:id="Rotor2Display" alignment="CENTER" layoutX="124.0" layoutY="167.0" prefHeight="26.0" prefWidth="40.0" underline="true">
+               </font>
+            </Label>
+            <Label fx:id="Rotor2Display" alignment="CENTER" layoutX="357.0" layoutY="161.0" prefHeight="26.0" prefWidth="40.0" textFill="#ebebeb" underline="true">
                <font>
                   <Font size="14.0" />
-               </font></Label>
-            <Label fx:id="Rotor3Display" alignment="CENTER" layoutX="124.0" layoutY="250.0" prefHeight="26.0" prefWidth="40.0" underline="true">
+               </font>
+            </Label>
+            <Label fx:id="Rotor3Display" alignment="CENTER" layoutX="357.0" layoutY="226.0" prefHeight="26.0" prefWidth="40.0" textFill="#e4dbdb" underline="true">
                <font>
                   <Font size="14.0" />
-               </font></Label>
-            <Slider fx:id="Rotor1" layoutX="74.0" layoutY="70.0" majorTickUnit="26.0" max="25.0" minorTickCount="0" prefHeight="34.0" prefWidth="140.0" showTickMarks="true">
+               </font>
+            </Label>
+            <Slider fx:id="Rotor1" layoutX="144.0" layoutY="89.0" majorTickUnit="26.0" max="25.0" minorTickCount="0" prefHeight="34.0" prefWidth="213.0" showTickMarks="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Slider>
-            <Slider fx:id="Rotor2" layoutX="75.0" layoutY="154.0" majorTickUnit="26.0" max="25.0" minorTickCount="0" showTickMarks="true">
+               </cursor>
+            </Slider>
+            <Slider fx:id="Rotor2" layoutX="144.0" layoutY="169.0" majorTickUnit="26.0" max="25.0" minorTickCount="0" prefHeight="26.0" prefWidth="213.0" showTickMarks="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Slider>
-            <Slider fx:id="Rotor3" layoutX="75.0" layoutY="237.0" majorTickUnit="26.0" max="25.0" minorTickCount="0" showTickMarks="true">
+               </cursor>
+            </Slider>
+            <Slider fx:id="Rotor3" layoutX="144.0" layoutY="237.0" majorTickUnit="26.0" max="25.0" minorTickCount="0" prefHeight="26.0" prefWidth="213.0" showTickMarks="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Slider>
-            <Spinner fx:id="plugKey1A" editable="true" layoutX="480.0" layoutY="78.0" prefHeight="26.0" prefWidth="54.0" />
-            <Label alignment="CENTER" layoutX="472.0" layoutY="46.0" prefHeight="26.0" prefWidth="71.0" text="Plug-KeyA " textFill="#0bb6d0" />
-            <Label alignment="CENTER" layoutX="539.0" layoutY="46.0" prefHeight="26.0" prefWidth="71.0" text="Plug-KeyB " textFill="#0ccf91" />
-            <Spinner fx:id="plugKey1B" editable="true" layoutX="547.0" layoutY="78.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey2B" layoutX="547.0" layoutY="111.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey2A" layoutX="480.0" layoutY="111.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey3B" layoutX="547.0" layoutY="148.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey3A" layoutX="480.0" layoutY="148.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey4A" layoutX="481.0" layoutY="187.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey4B" layoutX="547.0" layoutY="187.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey5A" layoutX="480.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey5B" layoutX="547.0" layoutY="222.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey6A" layoutX="480.0" layoutY="257.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey6B" layoutX="548.0" layoutY="257.0" prefHeight="26.0" prefWidth="54.0" />
-            <Button fx:id="Rotor1Button" layoutX="98.0" layoutY="45.0" mnemonicParsing="false" onAction="#Rotor1Change" prefHeight="27.0" prefWidth="94.0" text="CLICK ME!" textFill="#1c0ee5">
+               </cursor>
+            </Slider>
+            <Spinner fx:id="plugKey1A" editable="true" layoutX="565.0" layoutY="91.0" prefHeight="26.0" prefWidth="54.0" />
+            <Label alignment="CENTER" layoutX="556.0" layoutY="57.0" prefHeight="26.0" prefWidth="71.0" text="Plug-KeyA " textFill="#1ac4d7">
                <font>
-                  <Font name="AppleMyungjo Regular" size="13.0" />
+                  <Font name="American Typewriter" size="13.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="719.0" layoutY="57.0" prefHeight="26.0" prefWidth="71.0" text="Plug-KeyB " textFill="#0ccf91">
+               <font>
+                  <Font name="American Typewriter" size="13.0" />
+               </font>
+            </Label>
+            <Spinner fx:id="plugKey1B" editable="true" layoutX="727.0" layoutY="91.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey2B" layoutX="727.0" layoutY="124.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey2A" layoutX="565.0" layoutY="124.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey3B" layoutX="727.0" layoutY="161.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey3A" layoutX="565.0" layoutY="161.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey4A" layoutX="565.0" layoutY="199.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey4B" layoutX="728.0" layoutY="195.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey5A" layoutX="565.0" layoutY="237.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey5B" layoutX="727.0" layoutY="237.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey6A" layoutX="565.0" layoutY="274.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey6B" layoutX="727.0" layoutY="274.0" prefHeight="26.0" prefWidth="54.0" />
+            <Button fx:id="Rotor1Button" layoutX="214.0" layoutY="63.0" mnemonicParsing="false" onAction="#Rotor1Change" prefHeight="26.0" prefWidth="87.0" text="ROTATE()" textFill="#940c0c">
+               <font>
+                  <Font name="American Typewriter" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="Rotor2Button" layoutX="98.0" layoutY="124.0" mnemonicParsing="false" onAction="#Rotor2Change" prefHeight="17.0" prefWidth="94.0" text="CLICK ME!" textFill="#1c0ee5">
+            <Button fx:id="Rotor2Button" layoutX="214.0" layoutY="137.0" mnemonicParsing="false" onAction="#Rotor2Change" prefHeight="26.0" prefWidth="87.0" text="ROTATE()" textFill="#860909">
                <font>
-                  <Font name="AppleMyungjo Regular" size="13.0" />
+                  <Font name="American Typewriter" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="Rotor3Button" layoutX="97.0" layoutY="208.0" mnemonicParsing="false" onAction="#Rotor3Change" prefHeight="26.0" prefWidth="94.0" text="CLICK ME!" textFill="#1c0ee5">
+            <Button fx:id="Rotor3Button" layoutX="214.0" layoutY="208.0" mnemonicParsing="false" onAction="#Rotor3Change" prefHeight="26.0" prefWidth="87.0" text="ROTATE()" textFill="#830a0a">
                <font>
-                  <Font name="AppleMyungjo Regular" size="13.0" />
+                  <Font name="American Typewriter" size="13.0" />
                </font>
             </Button>
-            <Label layoutX="10.0" layoutY="15.0" prefHeight="27.0" prefWidth="287.0" text="*To change ROTOR orientation CLICK the Button*">
+            <Label alignment="CENTER" layoutX="36.0" layoutY="12.0" prefHeight="34.0" prefWidth="356.0" text="*To change ROTOR orientation CLICK the Button*" textFill="#f3f5f3">
                <font>
                   <Font name="Baskerville" size="13.0" />
                </font>
             </Label>
-            <TextArea fx:id="EnterText" layoutX="98.0" layoutY="287.0" onDragDetected="#cipherInput" prefHeight="116.0" prefWidth="356.0" wrapText="true" />
-            <Button fx:id="Clear" layoutX="30.0" layoutY="512.0" mnemonicParsing="false" onAction="#ClearButton" text="CLEAR" textFill="#156b08">
+            <TextArea fx:id="EnterText" layoutX="133.0" layoutY="283.0" onDragDetected="#cipherInput" prefHeight="132.0" prefWidth="400.0" wrapText="true" />
+            <Button fx:id="Clear" layoutX="56.0" layoutY="511.0" mnemonicParsing="false" onAction="#ClearButton" text="CLEAR" textFill="#156b08">
                <font>
-                  <Font name="Apple SD Gothic Neo Regular" size="13.0" />
+                  <Font name="American Typewriter" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="PlugkeyButton" layoutX="480.0" layoutY="446.0" mnemonicParsing="false" onAction="#PlugSwap" prefHeight="34.0" prefWidth="127.0" text="PLUG-KEYS" textFill="#1136f5" underline="true">
+            <Button fx:id="PlugkeyButton" layoutX="613.0" layoutY="468.0" mnemonicParsing="false" onAction="#PlugSwap" prefHeight="34.0" prefWidth="127.0" text="PLUG-KEYS" textFill="#c3062f" underline="true">
                <font>
-                  <Font name="Avenir Book" size="13.0" />
+                  <Font name="American Typewriter" size="13.0" />
                </font>
             </Button>
-            <Spinner fx:id="plugKey7A" layoutX="481.0" layoutY="296.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey8A" layoutX="481.0" layoutY="332.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey9A" layoutX="480.0" layoutY="367.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey10A" layoutX="480.0" layoutY="408.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey7B" layoutX="548.0" layoutY="296.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey8B" layoutX="547.0" layoutY="332.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey9B" layoutX="547.0" layoutY="367.0" prefHeight="26.0" prefWidth="54.0" />
-            <Spinner fx:id="plugKey10B" layoutX="547.0" layoutY="408.0" prefHeight="26.0" prefWidth="54.0" />
-            <Label alignment="CENTER_RIGHT" layoutX="339.0" layoutY="15.0" prefHeight="27.0" prefWidth="287.0" text="*To swap plugboard keys CLICK the Button*">
+            <Spinner fx:id="plugKey7A" layoutX="565.0" layoutY="311.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey8A" layoutX="565.0" layoutY="354.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey9A" layoutX="565.0" layoutY="390.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey10A" layoutX="565.0" layoutY="424.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey7B" layoutX="727.0" layoutY="311.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey8B" layoutX="727.0" layoutY="354.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey9B" layoutX="727.0" layoutY="390.0" prefHeight="26.0" prefWidth="54.0" />
+            <Spinner fx:id="plugKey10B" layoutX="727.0" layoutY="425.0" prefHeight="26.0" prefWidth="54.0" />
+            <Label alignment="CENTER_RIGHT" layoutX="508.0" layoutY="15.0" prefHeight="27.0" prefWidth="287.0" text="*To swap plugboard keys CLICK the Button*" textFill="WHITE">
                <font>
                   <Font name="Baskerville" size="13.0" />
                </font>
             </Label>
-            <TextArea fx:id="Ciphertext" layoutX="98.0" layoutY="438.0" onDragDetected="#CipherOutput" prefHeight="124.0" prefWidth="356.0" wrapText="true" />
+            <TextArea fx:id="Ciphertext" layoutX="133.0" layoutY="432.0" onDragDetected="#CipherOutput" prefHeight="132.0" prefWidth="400.0" wrapText="true" />
       </children>
     </AnchorPane>
   </children>

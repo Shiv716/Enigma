@@ -17,7 +17,7 @@ public class MainEnigma extends Application {
      {
         Parent root = FXMLLoader.load(getClass().getResource("encrypt.fxml"));
         primaryStage.setTitle("Enigma Machine");
-        primaryStage.setScene(new Scene(root, 630, 243));
+        primaryStage.setScene(new Scene(root, 600, 310));
         primaryStage.show();
     }
 }
