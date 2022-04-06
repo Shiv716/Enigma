@@ -113,6 +113,8 @@ public class EnigmaController implements Initializable {
 
     }
 
+    private static ArrayList<Integer> NumberValues = new ArrayList<Integer>(letterByNumber.keySet());
+
 
 
     //Storing the letter provided by the user:-
@@ -121,9 +123,13 @@ public class EnigmaController implements Initializable {
     private static String letter_needed;
 
 
+    //Through this we make sure that there is no inter-swapping of values and that once only 2 letters can be swapped.
+    public Label verifyLabel; // WARNING LABEL!
+
+
     //Inputs letter from the user:-
 
-    public void cipherInput(javafx.event.ActionEvent actionEvent) {
+    public void cipherInput(MouseEvent actionEvent) {
         try{
             d1 = EnterText.getText();
         }
@@ -197,98 +203,108 @@ public class EnigmaController implements Initializable {
     //TO SWAP KEYS ON PLUGBOARD:-
     public void PlugSwap(ActionEvent actionEvent) {
         //MAKING OBJECTS FOR SWAPPING VALUES OF SPINNERS WHENEVER INTERACTED:
+        //Then calling on those keys using PlugboardKeys() method to swap them in plugboard:-
 
         // FOR PLUG-KEYS 1A AND 1B:-
         key1A = plugKey1A.getValueFactory();
         key1B = plugKey1B.getValueFactory();
         if(!key1A.equals(key1B)){
+            //NAMING THE PLUGBOARD KEYS:
             String keyA = key1A.getValue();
             String keyB = key1B.getValue();
             PlugboardKeys(keyA, keyB);
-            //For Verifying:- (WORKING!)
-            System.out.println("Plugboard orientation: "+Arrays.toString(Plugboard.toArray()));
         }
 
         // FOR PLUG-KEYS 2A AND 2B:-
         key2A = plugKey2A.getValueFactory();
         key2B = plugKey2B.getValueFactory();
         if(!key2A.equals(key2B)){
-            String keyA = key2A.getValue();
-            String keyB = key2B.getValue();
-            PlugboardKeys(keyA,keyB);
+            //NAMING THE PLUGBOARD KEYS:
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
         }
 
         // FOR PLUG-KEYS 3A AND 3B:-
         key3A = plugKey3A.getValueFactory();
         key3B = plugKey3B.getValueFactory();
         if(!key3A.equals(key3B)){
-            String keyA = key3A.getValue();
-            String keyB = key3B.getValue();
-            PlugboardKeys(keyA,keyB);
+            //NAMING THE PLUGBOARD KEYS:
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
         }
 
         // FOR PLUG-KEYS 4A AND 4B:-
         key4A = plugKey4A.getValueFactory();
         key4B = plugKey4B.getValueFactory();
         if(!key4A.equals(key4B)){
-            String keyA = key4A.getValue();
-            String keyB = key4B.getValue();
-            PlugboardKeys(keyA,keyB);
+            //NAMING THE PLUGBOARD KEYS:
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
         }
 
         // FOR PLUG-KEYS 5A AND 5B:-
         key5A = plugKey5A.getValueFactory();
         key5B = plugKey5B.getValueFactory();
         if(!key5A.equals(key5B)){
-            String keyA = key5A.getValue();
-            String keyB = key5B.getValue();
-            PlugboardKeys(keyA,keyB);
+            //NAMING THE PLUGBOARD KEYS:
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
         }
 
         // FOR PLUG-KEYS 6A AND 6B:-
         key6A = plugKey6A.getValueFactory();
         key6B = plugKey6B.getValueFactory();
         if(!key6A.equals(key6B)){
-            String keyA = key6A.getValue();
-            String keyB = key6B.getValue();
-            PlugboardKeys(keyA,keyB);
+            //NAMING THE PLUGBOARD KEYS:
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
         }
 
         // FOR PLUG-KEYS 7A AND 7B:-
         key7A = plugKey7A.getValueFactory();
         key7B = plugKey7B.getValueFactory();
         if(!key7A.equals(key7B)){
-            String keyA = key7A.getValue();
-            String keyB = key7B.getValue();
-            PlugboardKeys(keyA,keyB);
+            //NAMING THE PLUGBOARD KEYS:
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
         }
 
         // FOR PLUG-KEYS 8A AND 8B:-
         key8A = plugKey8A.getValueFactory();
         key8B = plugKey8B.getValueFactory();
         if(!key8A.equals(key8B)){
-            String keyA = key8A.getValue();
-            String keyB = key8B.getValue();
-            PlugboardKeys(keyA,keyB);
+            //NAMING THE PLUGBOARD KEYS:
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
         }
 
         // FOR PLUG-KEYS 9A AND 9B:-
         key9A = plugKey9A.getValueFactory();
         key9B = plugKey9B.getValueFactory();
         if(!key9A.equals(key9B)){
-            String keyA = key9A.getValue();
-            String keyB = key9B.getValue();
-            PlugboardKeys(keyA,keyB);
+            //NAMING THE PLUGBOARD KEYS:
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
         }
 
         // FOR PLUG-KEYS 10A AND 10B:-
         key10A = plugKey10A.getValueFactory();
         key10B = plugKey10B.getValueFactory();
         if(!key10A.equals(key10B)){
-            String keyA = key10A.getValue();
-            String keyB = key10B.getValue();
-            PlugboardKeys(keyA,keyB);
+            //NAMING THE PLUGBOARD KEYS:
+            String keyA = key1A.getValue();
+            String keyB = key1B.getValue();
+            PlugboardKeys(keyA, keyB);
         }
+
     }
 
     //Just clear the text field:
@@ -374,7 +390,7 @@ public class EnigmaController implements Initializable {
         });
 
 
-        //USER GETS 6 PLUG-BOARD KEYS TO SWAP THE VALUES SO 6 OPTIONS TO CHOOSE FROM IF WANTED
+        //USER GETS 10 PLUG-BOARD KEYS TO SWAP THE VALUES SO 10 OPTIONS TO CHOOSE FROM IF WANTED
         // - FOR ADDING CHANGING VALUES BEFORE THE ELEMENT ENTERS THE ROTORS.
 
         //Making the spinners:-
